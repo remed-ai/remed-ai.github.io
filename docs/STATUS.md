@@ -15,13 +15,12 @@ Live: https://remed-ai.github.io/ · Showcase: https://remed-ai.github.io/?showc
 - None open. Hindi and Punjabi wording not yet human-reviewed.
 
 ## Blockers
-- First workflow runs sat in "queued" while GitHub Actions was degraded (githubstatus.com). Waiting on GitHub.
-- `VITE_GEMINI_API_KEY` secret: owner adding it; until then live scans show the fallback message.
+- Gemini key is set and reaches the build, but on 2026-11-04 every Flash model returned 503 "high demand" (Google-side, temporary). Live scans show the fallback until Google recovers; rerun "Gemini live check (manual)" to confirm.
 
 ## Next 3 tasks
-1. Confirm deploy + smoke test pass on `main`; rerun deploy after the key secret exists.
-2. Run "Gemini live check (manual)" and record the model used here.
+1. Rerun "Gemini live check (manual)" once Google capacity recovers; record the model used here.
+2. Optionally set Actions variable `VITE_GEMINI_MODEL` to a less busy model and redeploy.
 3. Human review of Hindi and Punjabi strings.
 
 ## Last working commit
-Locally verified: see `git log -1` on main after the "docs: point to renamed repo" commit. Deploy not yet confirmed.
+`9ccd541`: deploy + smoke test passed on main (https://remed-ai.github.io/). Later fallback fixes are pushed; check the latest "Test and deploy" run.
