@@ -25,7 +25,7 @@ test('Gemini reads the synthetic Zentrova strip', async () => {
   const png = await page.screenshot({ type: 'jpeg', quality: 85 });
   await browser.close();
 
-  const client = new GeminiClient({ key, model, timeoutMs: 60_000 });
+  const client = new GeminiClient({ key, model, timeoutMs: 25_000 });
   try {
     const r = await client.scan({ base64: png.toString('base64'), mime: 'image/jpeg' });
     const name = r.printed.find((p) => p.field === 'name')?.value ?? '';

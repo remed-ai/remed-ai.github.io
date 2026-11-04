@@ -50,7 +50,7 @@ export class GeminiClient {
     const MAX = 5;
     for (let attempt = 0; attempt < MAX; attempt++) {
       const ctrl = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), this.o.timeoutMs ?? 30_000);
+      const timer = setTimeout(() => ctrl.abort(), this.o.timeoutMs ?? 20_000);
       signal?.addEventListener('abort', () => ctrl.abort(), { once: true });
       let res: Response;
       try {
@@ -61,7 +61,15 @@ export class GeminiClient {
           signal: ctrl.signal,
         });
       } catch (e) {
-        throw new LiveUnavailableError('network', (e as Error).name);
+        if (signal?.aborted || attempt >= MAX - 1) throw new LiveUnavailableError('network', (e as Error).name);
+        // Timed out (model hanging under load): move to the next vision model.
+        clearTimeout(timer);
+        models ??= await listModels(this.o.key, f);
+        const next = pickVisionModel(models, tried);
+        if (!next) throw new LiveUnavailableError('network', 'timeout');
+        this.model = next;
+        tried.push(next);
+        continue;
       } finally {
         clearTimeout(timer);
       }
