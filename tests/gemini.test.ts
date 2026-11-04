@@ -39,11 +39,12 @@ describe('client', () => {
     expect(String(f.mock.calls[2][0])).toContain('gemini-9.9-flash');
   });
 
-  it('retries a 503, then switches to another model', async () => {
+  it('retries a 503, then works down the model list', async () => {
     const f = vi.fn()
       .mockResolvedValueOnce(ok({}, 503))
       .mockResolvedValueOnce(ok({}, 503))
-      .mockResolvedValueOnce(ok({ models: [{ name: 'models/gemini-flash-latest', supportedGenerationMethods: ['generateContent'] }, { name: 'models/gemini-2.5-flash', supportedGenerationMethods: ['generateContent'] }] }))
+      .mockResolvedValueOnce(ok({ models: ['gemini-flash-latest', 'gemini-3.8-flash', 'gemini-2.5-flash'].map((n) => ({ name: `models/${n}`, supportedGenerationMethods: ['generateContent'] })) }))
+      .mockResolvedValueOnce(ok({}, 503))
       .mockResolvedValueOnce(reply(valid));
     const c = new GeminiClient({ key: 'k', model: 'gemini-flash-latest', fetchImpl: f, retryDelayMs: 0 });
     const r = await c.scan({ base64: 'AA', mime: 'image/jpeg' });
