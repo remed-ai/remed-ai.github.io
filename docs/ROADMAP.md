@@ -25,7 +25,7 @@ Status key: **Live** (works on the site with Gemini), **Sample** (prepared/offli
 | Showcase / kiosk mode | Live | |
 | Offline attract screen (PWA) | Live | |
 | Two-minute judge tour | Live | |
-| Root URL https://remed-ai.github.io/ | Blocked | Repo is `remed-ai/Remed-ai`; needs rename to `remed-ai.github.io` (see STATUS) |
+| Root URL https://remed-ai.github.io/ | Live | Repo renamed to `remed-ai.github.io` |
 | Backend key storage | Planned | See LATER-SETUP.md |
 | Real drug database | Planned | |
 | Duplicate ingredient alerts | Planned | |

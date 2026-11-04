@@ -96,7 +96,7 @@ export function InfoBlocks() {
           <h2 id="team-title" className="text-4xl font-extrabold">Team & contact</h2>
           <p className="mt-4 text-lg text-white/80">Built by the Remed-AI team for this competition. Come and talk to us at the booth: we would love to hear what confused you about your own medicines.</p>
           <p className="mt-3 text-lg">
-            Source code: <a className="text-mint underline underline-offset-4" href={CONFIG.repoUrl} rel="noreferrer" target="_blank">github.com/remed-ai/Remed-ai</a>
+            Source code: <a className="text-mint underline underline-offset-4" href={CONFIG.repoUrl} rel="noreferrer" target="_blank">github.com/remed-ai/remed-ai.github.io</a>
           </p>
           <div className="mt-5"><Qr /></div>
         </section>

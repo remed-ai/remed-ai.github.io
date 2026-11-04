@@ -2,7 +2,7 @@
 
 **Browser-side Gemini key (temporary).** The owner chose a free demo key used directly from the browser, accepting that visitors can read it. No backend. Mitigations: key only in the Actions secret and injected only in the deploy build; 10 s per-device rate limit; downscaled images; key to be deleted after the competition (BOOTH.md). Moving to a backend is Planned (LATER-SETUP.md).
 
-**Base path from repo name.** The session repo is `remed-ai/Remed-ai`, not `remed-ai.github.io`. The deploy workflow sets `BASE_PATH` to `/` for `<owner>.github.io` repos and `/<repo>/` otherwise, so the site works now and moves to the root automatically if the repo is renamed.
+**Base path from repo name.** The repo started as `remed-ai/Remed-ai` and was renamed to `remed-ai.github.io` so the site lives at the root. The deploy workflow still derives `BASE_PATH` from the repo name (`/` for `<owner>.github.io`, `/<repo>/` otherwise), so a future rename cannot break asset paths.
 
 **Provider interface.** `ScanProvider` hides live Gemini vs prepared samples so the sample flow never depends on network, camera or quota.
 

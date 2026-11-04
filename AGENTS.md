@@ -5,7 +5,7 @@ Read `docs/STATUS.md` first.
 ## Product
 Demo website that scans medicine strips (front and back), prescriptions, lab reports and other medical documents, then explains them in plain language in English, Hindi and Punjabi. Always shows: "Not professional medical advice." First audience: competition judges and booth visitors using a phone on a table (showcase mode).
 
-Live URL and repo-name note: see `docs/STATUS.md`. Showcase: add `?showcase=1`.
+Repo `remed-ai/remed-ai.github.io` → live at https://remed-ai.github.io/ (showcase: https://remed-ai.github.io/?showcase=1).
 
 ## Git rules (enforced by `.claude/hooks/guard-git.mjs` and `.githooks/pre-push`)
 - Work and push only on `main`. Never create branches, worktrees, PRs, or tags. No `/batch`, agent teams, or background agents.

@@ -17,7 +17,7 @@ export const CONFIG = {
   exitHoldMs: 5_000,
   /** Default Gemini model; override with VITE_GEMINI_MODEL. */
   defaultModel: 'gemini-flash-latest',
-  repoUrl: 'https://github.com/remed-ai/Remed-ai',
+  repoUrl: 'https://github.com/remed-ai/remed-ai.github.io',
 } as const;
 
 export const geminiKey = (): string => (import.meta.env.VITE_GEMINI_API_KEY as string | undefined)?.trim() ?? '';
