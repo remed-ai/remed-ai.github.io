@@ -8,7 +8,7 @@ const prePush = (line) => spawnSync('bash', ['.githooks/pre-push'], { input: `${
 const Z = '0'.repeat(40);
 const cases = [
   ['git branch', 0], ['git branch -a', 0], ['git branch --show-current', 0], ['git checkout main', 0],
-  ['git push -u origin main', 0], ['git pull --rebase origin main', 0], ['git worktree list', 0], ['gh api repos/x/y', 0],
+  ['git push -u origin main', 0], ['git push -u origin main 2>&1 | tail -5', 0], ['git push origin dev 2>&1', 2], ['git pull --rebase origin main', 0], ['git worktree list', 0], ['gh api repos/x/y', 0],
   ["cat > a.md <<'EOF'\nUse `gh api`, not `gh pr`.\nEOF\necho ok", 0],
   ['git branch feature', 2], ['git checkout -b x', 2], ['git switch -c x', 2], ['git -C . branch -m new', 2],
   ['git worktree add ../x', 2], ['git push --force origin main', 2], ['git push origin +main', 2],

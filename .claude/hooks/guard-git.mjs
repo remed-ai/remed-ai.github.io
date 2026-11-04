@@ -18,7 +18,12 @@ const block = (why) => {
 cmd = cmd.replace(/<<-?\s*(['"]?)(\w+)\1[^\n]*\n[\s\S]*?\n\s*\2(?=\s|$)/g, '');
 const parts = cmd.split(/&&|\|\||;|\||\n|\$\(|`/);
 for (const raw of parts) {
-  const t = raw.trim().replace(/^(sudo|env\s+\S+=\S+)\s+/, '').split(/\s+/).filter(Boolean);
+  const t = raw
+    .trim()
+    .replace(/^(sudo|env\s+\S+=\S+)\s+/, '')
+    .replace(/\d*[<>]+&?\d*\s*(?:\S+)?/g, ' ') // drop redirections like 2>&1, > out.txt
+    .split(/\s+/)
+    .filter(Boolean);
   const gi = t.indexOf('git');
   if (t[0] === 'gh' && (t[1] === 'pr' || t[1] === 'issue')) block('use "gh api", not gh pr / gh issue');
   if (gi === -1) continue;
