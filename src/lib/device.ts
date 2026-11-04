@@ -55,4 +55,5 @@ export async function requestMotionPermission(): Promise<boolean> {
   }
 }
 export const motionNeedsPermission = () =>
+  typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches &&
   typeof (globalThis as unknown as { DeviceOrientationEvent?: { requestPermission?: unknown } }).DeviceOrientationEvent?.requestPermission === 'function';

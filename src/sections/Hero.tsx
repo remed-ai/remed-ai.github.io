@@ -75,7 +75,7 @@ export function Hero({ phoneRef }: { phoneRef: RefObject<HTMLDivElement | null> 
       <div className="relative z-10 mx-auto grid max-w-7xl gap-8 px-4 pt-20 md:grid-cols-[1.25fr_1fr] md:items-center md:px-10 md:pt-28">
         <div>
           <p className="kicker">Remed-AI · live demo</p>
-          <h1 id="hero-title" className="mt-4 font-extrabold" style={{ fontStretch: '118%', lineHeight: 0.9, letterSpacing: '-0.035em', fontSize: 'clamp(2.9rem, 12.4vw, 8.4rem)' }}>
+          <h1 id="hero-title" className="mt-4 font-extrabold" style={{ fontStretch: '118%', lineHeight: 0.9, letterSpacing: '-0.035em', fontSize: 'clamp(2.9rem, min(12.4vw, 4.4vw + 2rem), 6.6rem)' }}>
             Scan any medicine.{' '}
             <span className="glow-mint">Understand it</span> in your language.
           </h1>
