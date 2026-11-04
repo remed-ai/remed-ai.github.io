@@ -27,3 +27,5 @@
 **Gemini `x-goog-api-key` header.** Keeps the key out of URLs and request logs.
 
 **Default model `gemini-flash-latest`.** An alias that tracks the current vision-capable Flash model; overridable with the `VITE_GEMINI_MODEL` Actions variable, with automatic fallback via the model list.
+
+**Design taken from the earlier RemedAI app (owner request).** Paper-and-ink palette, turmeric marigold accent, rubber-stamp teal, brick for warnings; Fraunces + Atkinson Hyperlegible; dog-eared cards; highlighter stroke behind the result title; bottom navigation; Simple Mode and high contrast. No emojis: line icons only. Samples are not offered on the normal scan screen; they appear only as a fallback when live scanning fails, via `/scan?sample=<id>`, and on the staff pages.

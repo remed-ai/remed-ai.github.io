@@ -27,7 +27,7 @@ test('auto-reset after idle clears everything', async ({ page }) => {
   await page.clock.runFor(1000);
   await page.getByTestId('sc-sample-zentrova').click();
   await page.clock.runFor(1500);
-  await page.getByRole('button', { name: 'हिन्दी' }).click();
+  await page.getByTestId('result').getByRole('button', { name: 'हिन्दी' }).click();
   await expect(page.getByTestId('result-source')).toHaveText('नमूना परिणाम');
   await page.clock.runFor(30_500);
   await expect(page.getByTestId('still-there')).toBeVisible();

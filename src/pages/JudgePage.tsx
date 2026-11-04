@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ScanPanel } from '../demo/ScanDemo';
+import { SampleChips, ScanPanel } from '../demo/ScanDemo';
 import { useScanner } from '../demo/useScanner';
-import { LangBar } from '../demo/LangBar';
+import { LangSwitch } from '../ui/LangSwitch';
 import { Link } from '../lib/router';
 import type { Sample } from '../scan/samples';
 import type { Lang } from '../scan/schema';
@@ -47,28 +47,29 @@ export function JudgePage() {
 
   const step = i != null ? STEPS[i] : null;
   return (
-    <div className="mx-auto max-w-3xl px-4 py-6">
+    <div className="mx-auto max-w-[640px] px-4 py-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-3xl font-extrabold">Judge tour · 2 minutes</h1>
-        <LangBar />
+        <h1 className="text-2xl">Judge tour · 2 minutes</h1>
+        <LangSwitch />
       </div>
       {step && i != null ? (
         <div className="card sticky top-2 z-20 mt-4 p-5" data-testid="judge-panel">
-          <p className="text-sm font-semibold text-accent-dark">Step {i + 1} of {STEPS.length} · {step.at} · {left}s</p>
+          <p className="text-sm font-semibold text-marigold-deep">Step {i + 1} of {STEPS.length} · {step.at} · {left}s</p>
           <p className="mt-1 text-2xl font-bold">{step.title}</p>
           <p className="mt-1">{step.say}</p>
-          <div className="mt-3 h-1.5 overflow-hidden rounded bg-sand"><div className="h-full bg-accent transition-all" style={{ width: `${((step.secs - left) / step.secs) * 100}%` }} /></div>
+          <div className="mt-3 h-1.5 overflow-hidden rounded bg-sunken"><div className="h-full bg-marigold transition-all" style={{ width: `${((step.secs - left) / step.secs) * 100}%` }} /></div>
           <div className="mt-3 flex gap-2">
-            <button type="button" className="btn-quiet" disabled={i === 0} onClick={() => go(i - 1)}>Back</button>
+            <button type="button" className="btn-ghost" disabled={i === 0} onClick={() => go(i - 1)}>Back</button>
             <button type="button" className="btn-ink" onClick={() => (i + 1 < STEPS.length ? go(i + 1) : setI(null))}>Next</button>
-            <button type="button" className="btn-quiet ml-auto" onClick={() => setI(null)}>End</button>
+            <button type="button" className="btn-ghost ml-auto" onClick={() => setI(null)}>End</button>
           </div>
         </div>
       ) : (
         <button type="button" className="btn-primary mt-4 min-h-14 w-full text-xl" onClick={() => go(0)} data-testid="judge-start">Start the tour</button>
       )}
       <div className="mt-6"><ScanPanel scanner={scanner} /></div>
-      <p className="mt-6 text-muted"><Link to="/demo" className="underline">Booth mode</Link> · <Link to="/" className="underline">Home</Link></p>
+      {scanner.state.phase !== 'result' && <div className="mt-6"><p className="eyebrow mb-2">Sample items</p><SampleChips onPick={scanner.runSample} /></div>}
+      <p className="mt-6 text-ink-soft"><Link to="/demo" className="underline">Booth mode</Link> · <Link to="/" className="underline">Home</Link></p>
     </div>
   );
 }

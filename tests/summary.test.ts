@@ -10,6 +10,7 @@ describe('summary', () => {
     expect(s.title).toBe('ZENTROVA 500');
     expect(s.lines.join(' ')).toContain('EXP 08/2028');
     expect(s.lines.join(' ')).toContain('As directed by the physician');
+    expect(s.lines.join(' ')).not.toMatch(/warning/i);
   });
   it('lab summary lists values outside the printed range', () => {
     expect(summarize(lab.result, 'en').lines[1]).toBe('Outside the printed range: Haemoglobin, Vitamin D (25-OH), Total cholesterol');

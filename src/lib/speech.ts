@@ -16,7 +16,7 @@ function voices(): Promise<SpeechSynthesisVoice[]> {
 }
 
 /** Speak text; resolves false when the device has no voice for this language. */
-export async function speak(text: string, lang: Lang): Promise<boolean> {
+export async function speak(text: string, lang: Lang, rate = 1, onEnd?: () => void): Promise<boolean> {
   if (!speechSupported()) return false;
   const tag = SPEECH_LANG[lang];
   const list = await voices();
@@ -26,7 +26,8 @@ export async function speak(text: string, lang: Lang): Promise<boolean> {
   const u = new SpeechSynthesisUtterance(text);
   u.voice = voice;
   u.lang = voice.lang;
-  u.rate = 0.95;
+  u.rate = rate;
+  if (onEnd) u.onend = onEnd;
   speechSynthesis.speak(u);
   return true;
 }

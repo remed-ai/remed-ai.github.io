@@ -25,6 +25,8 @@ Status key: **Live** (works on the site with Gemini), **Sample** (prepared/offli
 | Booth / kiosk mode (`/demo`) | Live | Hidden staff page |
 | Plain summary of each scan | Live | Built only from printed text |
 | Scan history (on device) | Live | Up to 30, clearable |
+| My Medicines (saved printed details + expiry status) | Live | On device; no reminders yet |
+| Simple Mode, high contrast, voice speed, text size | Live | Settings page |
 | Voice questions (speech input) | Live | Where the browser supports it |
 | Offline attract screen (PWA) | Live | |
 | Two-minute judge tour (`/judge`) | Live | Hidden page |

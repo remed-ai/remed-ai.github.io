@@ -5,10 +5,10 @@ Updated: 2026-11-04
 Live: https://remed-ai.github.io/ · Booth: /demo (PIN 2580) · Judges: /judge
 
 ## What works (locally verified)
-- Light warm redesign: welcome (big Scan now) → /scan (photo, upload, voice, samples) → summary + details; /history, /about.
-- Hidden /demo booth kiosk (TRY SCAN, idle reset, PIN exit) and /judge 2-minute tour.
-- Live Gemini with Zod validation, retries and model fallback; samples always work offline.
-- 62 unit tests, 14 Playwright phone tests, 28 guard checks pass.
+- Paper-and-ink redesign based on the earlier RemedAI app: Home (quote + scan card + recent), Scan (viewfinder), results with read-aloud bar, History, My Medicines, Settings.
+- Hidden /demo booth kiosk (TRY SCAN, idle reset, PIN exit) and /judge 2-minute tour. Samples via /scan?sample=<id>.
+- Live Gemini with Zod validation, retries and model fallback.
+- 62 unit tests, 16 Playwright phone tests, 28 guard checks pass.
 
 ## Known bugs
 - None open. Hindi and Punjabi wording not yet human-reviewed.

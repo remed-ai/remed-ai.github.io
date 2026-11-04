@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { grabVideoFrame } from '../scan/image';
 import { useUi } from '../ui/UiContext';
+import { IconImage } from '../ui/icons';
 
-/** Live camera with a photo-capture fallback (iOS without permission, desktop without camera). */
-export function Camera({ onCapture, big = false, armed = true }: { onCapture: (b: Blob) => void; big?: boolean; armed?: boolean }) {
+/** Viewfinder with marigold corners, shutter and a photo fallback. */
+export function Camera({ onCapture, armed = true, big = false }: { onCapture: (b: Blob) => void; armed?: boolean; big?: boolean }) {
   const { t } = useUi();
   const video = useRef<HTMLVideoElement>(null);
+  const file = useRef<HTMLInputElement>(null);
   const [live, setLive] = useState<boolean | null>(null);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let stream: MediaStream | null = null;
@@ -31,34 +34,46 @@ export function Camera({ onCapture, big = false, armed = true }: { onCapture: (b
       cancelled = true;
       stream?.getTracks().forEach((tr) => tr.stop());
     };
-  }, []);
+  }, [attempt]);
 
-  const shoot = async () => {
-    if (video.current && live) onCapture(await grabVideoFrame(video.current));
-  };
+  const picker = (
+    <input ref={file} type="file" accept="image/*" capture="environment" className="sr-only" data-testid="upload-input"
+      onChange={(e) => e.target.files?.[0] && onCapture(e.target.files[0])} />
+  );
+
+  if (live === false) {
+    return (
+      <div className="card p-6 text-center" data-testid="camera">
+        <h3 className="text-xl">{t('camErrTitle')}</h3>
+        <p className="mt-1 text-ink-soft">{t('camErrBody')}</p>
+        <div className="mt-4 grid gap-2">
+          <button type="button" className="btn-primary" onClick={() => file.current?.click()} disabled={!armed}>{t('chooseInstead')}</button>
+          <button type="button" className="btn-ghost" onClick={() => setAttempt((a) => a + 1)}>{t('tryAgain')}</button>
+        </div>
+        {picker}
+      </div>
+    );
+  }
 
   return (
-    <div className="relative overflow-hidden rounded-[1.75rem] bg-black" data-testid="camera">
-      <video ref={video} playsInline muted className={`w-full object-cover ${big ? 'h-[62vh]' : 'aspect-[3/4] max-h-[60vh]'} ${live ? '' : 'hidden'}`} aria-label="Camera preview" />
-      {live && <div className="scan-reticle pointer-events-none absolute inset-6" aria-hidden />}
-      {live === false && (
-        <div className="grid min-h-64 place-items-center p-6 text-center text-white">
-          <p className="text-lg">{t('noCamera')}</p>
-        </div>
-      )}
-      <div className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-3 p-4">
-        {live && armed && (
-          <button type="button" onClick={shoot} className="btn-coral min-h-16 min-w-40 text-2xl" data-testid="shutter">
-            {t('capture')}
-          </button>
-        )}
-        {(live === false || live === null) && armed && (
-          <label className="btn-coral min-h-16 cursor-pointer px-6 text-xl">
-            {t('takePhoto')}
-            <input type="file" accept="image/*" capture="environment" className="sr-only" onChange={(e) => e.target.files?.[0] && onCapture(e.target.files[0])} />
-          </label>
-        )}
+    <div data-testid="camera">
+      <div className="viewfinder" style={big ? { maxHeight: '56vh' } : undefined}>
+        <video ref={video} playsInline muted className="size-full object-cover" aria-label="Camera preview" />
+        <span className="corner corner-tl" aria-hidden /><span className="corner corner-tr" aria-hidden />
+        <span className="corner corner-bl" aria-hidden /><span className="corner corner-br" aria-hidden />
       </div>
+      <p className="my-3 text-center text-sm text-ink-soft">{t('holdSteady')}</p>
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+        <button type="button" className="btn-ghost justify-self-start whitespace-nowrap px-3 text-sm" onClick={() => file.current?.click()} disabled={!armed} aria-label={t('chooseInstead')}>
+          <IconImage size={18} />{t('upload')}
+        </button>
+        <button type="button" className="shutter" aria-label={t('capture')} data-testid="shutter" disabled={!armed || !live}
+          onClick={async () => video.current && onCapture(await grabVideoFrame(video.current))}>
+          <span />
+        </button>
+        <span />
+      </div>
+      {picker}
     </div>
   );
 }

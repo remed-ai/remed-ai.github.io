@@ -20,10 +20,10 @@ export function DemoPage() {
   if (running) return <Showcase onExit={() => { history.replaceState(null, '', href('/demo')); setRunning(false); }} />;
   return (
     <div className="mx-auto max-w-2xl px-4 py-6">
-      <p className="text-sm font-bold uppercase tracking-widest text-accent">Staff settings</p>
-      <h1 className="text-3xl font-extrabold">Booth mode</h1>
+      <p className="eyebrow">Staff settings</p>
+      <h1 className="text-3xl">Booth mode</h1>
       <button type="button" className="btn-primary mt-5 min-h-16 w-full text-2xl" onClick={() => setRunning(true)} data-testid="start-booth">Start booth mode</button>
-      <ul className="card mt-5 list-disc space-y-2 p-5 pl-9">
+      <ul className="card dot-list mt-5 space-y-2 p-5">
         <li>Exit: hold the bottom-right corner for 5 seconds, then PIN <strong>{CONFIG.staffPin}</strong>.</li>
         <li>Resets itself after {CONFIG.idleMs / 1000} s without a touch.</li>
         <li>iPhone: Share → Add to Home Screen, then Settings → Accessibility → Guided Access.</li>
@@ -32,10 +32,10 @@ export function DemoPage() {
       <div className="card mt-4 grid gap-2 p-5">
         <p>Live scanning: <strong data-testid="key-status">{geminiKey() ? 'configured' : 'not configured (samples only)'}</strong></p>
         <p>Model: <code>{geminiModel()}</code> (falls back automatically when busy)</p>
-        <p><a className="font-semibold text-accent-dark underline" href={href('/booth/print.html')}>Printable sample items</a></p>
-        <button type="button" className="btn-quiet justify-self-start" onClick={() => { clearHistory(); setCleared(true); }}>{cleared ? 'History cleared' : 'Clear history on this device'}</button>
+        <p><a className="font-semibold text-marigold-deep underline" href={href('/booth/print.html')}>Printable sample items</a></p>
+        <button type="button" className="btn-ghost justify-self-start" onClick={() => { clearHistory(); setCleared(true); }}>{cleared ? 'History cleared' : 'Clear history on this device'}</button>
       </div>
-      <div className="mt-4 flex items-center gap-4"><Qr url={site} /><p className="break-all text-muted">{site}</p></div>
+      <div className="mt-4 flex items-center gap-4"><Qr url={site} /><p className="break-all text-ink-soft">{site}</p></div>
       <p className="mt-6"><Link to="/judge" className="underline">Judge tour</Link> · <Link to="/" className="underline">Home</Link></p>
     </div>
   );

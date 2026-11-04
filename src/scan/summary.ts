@@ -34,10 +34,8 @@ export function summarize(r: ScanResult, lang: Lang): { title: string; lines: st
   const ingr = printed('strength')[0] ?? printed('ingredient')[0];
   const exp = printed('expiry')[0];
   const dir = printed('directions')[0];
-  const warn = printed('warnings').length;
   if (ingr) lines.push(ingr);
   if (exp) lines.push(pick(lang, { en: `Expiry: ${exp}`, hi: `समाप्ति: ${exp}`, pa: `ਮਿਆਦ: ${exp}` }));
   if (dir) lines.push(pick(lang, { en: `Directions as printed: ${dir}`, hi: `छपे निर्देश: ${dir}`, pa: `ਛਪੀਆਂ ਹਿਦਾਇਤਾਂ: ${dir}` }));
-  if (warn) lines.push(pick(lang, { en: `${warn} printed warning(s) below`, hi: `नीचे ${warn} छपी चेतावनी`, pa: `ਹੇਠਾਂ ${warn} ਛਪੀ ਚੇਤਾਵਨੀ` }));
   return { title: names[0] ?? pick(lang, { en: 'Scanned item', hi: 'स्कैन की गई वस्तु', pa: 'ਸਕੈਨ ਕੀਤੀ ਚੀਜ਼' }), lines };
 }
