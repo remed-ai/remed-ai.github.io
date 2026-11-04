@@ -6,8 +6,8 @@ const API = 'https://generativelanguage.googleapis.com/v1beta';
 type Fetch = typeof fetch;
 
 /** Choose a vision-capable Gemini model from the model list. */
-export function pickVisionModel(names: string[]): string | null {
-  const clean = names.map((n) => n.replace(/^models\//, ''));
+export function pickVisionModel(names: string[], exclude = ''): string | null {
+  const clean = names.map((n) => n.replace(/^models\//, '')).filter((n) => n !== exclude);
   const bad = /(tts|image|audio|live|embed|aqa|thinking|vision-preview|learnlm|gemma|nano|robotics|computer)/i;
   const ok = clean.filter((n) => n.startsWith('gemini') && !bad.test(n));
   const ver = (n: string) => Number(n.match(/gemini-(\d+(?:\.\d+)?)/)?.[1] ?? 0);
@@ -33,7 +33,9 @@ export function extractJson(text: string): unknown {
   return JSON.parse(t.slice(start, end + 1));
 }
 
-export interface GeminiOpts { key: string; model: string; fetchImpl?: Fetch; timeoutMs?: number }
+export interface GeminiOpts { key: string; model: string; fetchImpl?: Fetch; timeoutMs?: number; retryDelayMs?: number }
+
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export class GeminiClient {
   private model: string;
@@ -43,7 +45,8 @@ export class GeminiClient {
 
   private async call(body: unknown, signal?: AbortSignal): Promise<string> {
     const f = this.o.fetchImpl ?? fetch;
-    for (let attempt = 0; attempt < 2; attempt++) {
+    let switched = false;
+    for (let attempt = 0; attempt < 3; attempt++) {
       const ctrl = new AbortController();
       const timer = setTimeout(() => ctrl.abort(), this.o.timeoutMs ?? 30_000);
       signal?.addEventListener('abort', () => ctrl.abort(), { once: true });
@@ -66,6 +69,17 @@ export class GeminiClient {
         this.resolved = true;
         if (!picked) throw new LiveUnavailableError('model', 'no vision model');
         this.model = picked;
+        continue;
+      }
+      if (res.status >= 500 && attempt < 2) {
+        // Overloaded or unavailable: retry once, then switch to another vision model.
+        if (attempt === 0) await wait(this.o.retryDelayMs ?? 1200);
+        else if (!switched) {
+          const picked = pickVisionModel(await listModels(this.o.key, f), this.model);
+          if (!picked) throw new LiveUnavailableError('network', `http ${res.status}`);
+          this.model = picked;
+          switched = true;
+        }
         continue;
       }
       if (res.status === 429) throw new LiveUnavailableError('quota');

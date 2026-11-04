@@ -39,6 +39,18 @@ describe('client', () => {
     expect(String(f.mock.calls[2][0])).toContain('gemini-9.9-flash');
   });
 
+  it('retries a 503, then switches to another model', async () => {
+    const f = vi.fn()
+      .mockResolvedValueOnce(ok({}, 503))
+      .mockResolvedValueOnce(ok({}, 503))
+      .mockResolvedValueOnce(ok({ models: [{ name: 'models/gemini-flash-latest', supportedGenerationMethods: ['generateContent'] }, { name: 'models/gemini-2.5-flash', supportedGenerationMethods: ['generateContent'] }] }))
+      .mockResolvedValueOnce(reply(valid));
+    const c = new GeminiClient({ key: 'k', model: 'gemini-flash-latest', fetchImpl: f, retryDelayMs: 0 });
+    const r = await c.scan({ base64: 'AA', mime: 'image/jpeg' });
+    expect(r.kind).toBe('medicine');
+    expect(c.modelName).toBe('gemini-2.5-flash');
+  });
+
   it('maps quota errors and bad output to LiveUnavailableError', async () => {
     const quota = new GeminiClient({ key: 'k', model: 'm', fetchImpl: vi.fn().mockResolvedValue(ok({}, 429)) });
     await expect(quota.scan({ base64: '', mime: 'image/jpeg' })).rejects.toMatchObject({ reason: 'quota' });
