@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Allow only fast-forward pushes of main to main. No tags, deletes, or force pushes.
+zero=0000000000000000000000000000000000000000
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ -z "$local_ref" ] && continue
+  if [ "$remote_ref" != "refs/heads/main" ]; then
+    echo "pre-push: refusing push to '$remote_ref'. Only main is allowed." >&2; exit 1
+  fi
+  if [ "$local_sha" = "$zero" ]; then
+    echo "pre-push: refusing to delete main." >&2; exit 1
+  fi
+  if [ "$remote_sha" != "$zero" ] && ! git merge-base --is-ancestor "$remote_sha" "$local_sha" 2>/dev/null; then
+    echo "pre-push: refusing non-fast-forward (force) push. Run git pull --rebase origin main." >&2; exit 1
+  fi
+done
+exit 0
