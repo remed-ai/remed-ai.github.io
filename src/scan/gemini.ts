@@ -83,7 +83,11 @@ export class GeminiClient {
         continue;
       }
       if (res.status === 429) throw new LiveUnavailableError('quota');
-      if (!res.ok) throw new LiveUnavailableError(res.status === 400 || res.status === 403 ? 'no_key' : 'network', `http ${res.status}`);
+      if (!res.ok) {
+        // Google's error text helps diagnose; it never contains the key, but strip it defensively.
+        const msg = await res.text().then((x) => x.replace(this.o.key, '***').replace(/\s+/g, ' ').slice(0, 300)).catch(() => '');
+        throw new LiveUnavailableError(res.status === 400 || res.status === 403 ? 'no_key' : 'network', `http ${res.status} ${msg}`.trim());
+      }
       const j = (await res.json()) as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
       const text = j.candidates?.[0]?.content?.parts?.map((p) => p.text ?? '').join('') ?? '';
       if (!text) throw new LiveUnavailableError('bad_response', 'empty');
