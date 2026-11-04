@@ -66,6 +66,20 @@ const en = {
   stillThere: 'Still there?',
   imHere: "I'm here",
   scanMe: 'SCAN ANOTHER!',
+  speak: 'Speak', listening: 'Listening…',
+  welcome: 'Understand your medicines in your language.',
+  scanNow: 'Scan now',
+  history: 'History', about: 'About', home: 'Home',
+  scanTitle: 'Scan a medicine or document',
+  scanHint: 'Strip, back of strip, prescription or lab report.',
+  takePhotoBig: 'Take photo', uploadBig: 'Upload photo',
+  orSample: 'No item handy? Try a sample:',
+  voiceOn: 'Read results aloud',
+  privacyShort: 'Photos are sent to Google Gemini to read them. Please don’t scan documents with personal details.',
+  ok: 'OK, continue',
+  historyEmpty: 'No scans yet. Your scans are saved only on this phone.',
+  clearHistory: 'Clear history', delete: 'Delete', open: 'Open',
+  historyNote: 'Saved only on this phone.',
 };
 
 export type StringKey = keyof typeof en;
@@ -136,6 +150,20 @@ const hi: Dict = {
   stillThere: 'क्या आप अभी भी हैं?',
   imHere: 'मैं यहाँ हूँ',
   scanMe: 'एक और स्कैन!',
+  speak: 'बोलें', listening: 'सुन रहे हैं…',
+  welcome: 'अपनी दवाओं को अपनी भाषा में समझें।',
+  scanNow: 'अभी स्कैन करें',
+  history: 'इतिहास', about: 'जानकारी', home: 'होम',
+  scanTitle: 'दवा या दस्तावेज़ स्कैन करें',
+  scanHint: 'स्ट्रिप, स्ट्रिप का पिछला हिस्सा, पर्चा या लैब रिपोर्ट।',
+  takePhotoBig: 'फ़ोटो लें', uploadBig: 'फ़ोटो अपलोड करें',
+  orSample: 'कोई वस्तु पास नहीं? नमूना आज़माएँ:',
+  voiceOn: 'परिणाम पढ़कर सुनाएँ',
+  privacyShort: 'फ़ोटो पढ़ने के लिए Google Gemini को भेजी जाती हैं। कृपया निजी जानकारी वाले दस्तावेज़ स्कैन न करें।',
+  ok: 'ठीक है, आगे बढ़ें',
+  historyEmpty: 'अभी कोई स्कैन नहीं। आपके स्कैन केवल इसी फ़ोन पर सहेजे जाते हैं।',
+  clearHistory: 'इतिहास मिटाएँ', delete: 'हटाएँ', open: 'खोलें',
+  historyNote: 'केवल इसी फ़ोन पर सहेजा गया।',
 };
 
 const pa: Dict = {
@@ -203,6 +231,20 @@ const pa: Dict = {
   stillThere: 'ਕੀ ਤੁਸੀਂ ਹਾਲੇ ਵੀ ਹੋ?',
   imHere: 'ਮੈਂ ਇੱਥੇ ਹਾਂ',
   scanMe: 'ਇੱਕ ਹੋਰ ਸਕੈਨ!',
+  speak: 'ਬੋਲੋ', listening: 'ਸੁਣ ਰਹੇ ਹਾਂ…',
+  welcome: 'ਆਪਣੀਆਂ ਦਵਾਈਆਂ ਨੂੰ ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਸਮਝੋ।',
+  scanNow: 'ਹੁਣੇ ਸਕੈਨ ਕਰੋ',
+  history: 'ਇਤਿਹਾਸ', about: 'ਜਾਣਕਾਰੀ', home: 'ਹੋਮ',
+  scanTitle: 'ਦਵਾਈ ਜਾਂ ਦਸਤਾਵੇਜ਼ ਸਕੈਨ ਕਰੋ',
+  scanHint: 'ਸਟ੍ਰਿਪ, ਸਟ੍ਰਿਪ ਦਾ ਪਿਛਲਾ ਪਾਸਾ, ਪਰਚੀ ਜਾਂ ਲੈਬ ਰਿਪੋਰਟ।',
+  takePhotoBig: 'ਫ਼ੋਟੋ ਖਿੱਚੋ', uploadBig: 'ਫ਼ੋਟੋ ਅੱਪਲੋਡ ਕਰੋ',
+  orSample: 'ਕੋਈ ਚੀਜ਼ ਕੋਲ ਨਹੀਂ? ਨਮੂਨਾ ਅਜ਼ਮਾਓ:',
+  voiceOn: 'ਨਤੀਜੇ ਪੜ੍ਹ ਕੇ ਸੁਣਾਓ',
+  privacyShort: 'ਫ਼ੋਟੋਆਂ ਪੜ੍ਹਨ ਲਈ Google Gemini ਨੂੰ ਭੇਜੀਆਂ ਜਾਂਦੀਆਂ ਹਨ। ਕਿਰਪਾ ਕਰਕੇ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਵਾਲੇ ਦਸਤਾਵੇਜ਼ ਸਕੈਨ ਨਾ ਕਰੋ।',
+  ok: 'ਠੀਕ ਹੈ, ਅੱਗੇ ਵਧੋ',
+  historyEmpty: 'ਹਾਲੇ ਕੋਈ ਸਕੈਨ ਨਹੀਂ। ਤੁਹਾਡੇ ਸਕੈਨ ਸਿਰਫ਼ ਇਸੇ ਫ਼ੋਨ ਉੱਤੇ ਸੰਭਾਲੇ ਜਾਂਦੇ ਹਨ।',
+  clearHistory: 'ਇਤਿਹਾਸ ਮਿਟਾਓ', delete: 'ਹਟਾਓ', open: 'ਖੋਲ੍ਹੋ',
+  historyNote: 'ਸਿਰਫ਼ ਇਸੇ ਫ਼ੋਨ ਉੱਤੇ ਸੰਭਾਲਿਆ ਗਿਆ।',
 };
 
 export const STRINGS: Record<Lang, Dict> = { en, hi, pa };

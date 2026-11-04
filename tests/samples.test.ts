@@ -9,8 +9,8 @@ describe('samples', () => {
   it('every prepared result is valid structured data', () => {
     for (const s of SAMPLES()) expect(() => ScanResult.parse(s.result)).not.toThrow();
   });
-  it('every sample item is marked DEMO ONLY', () => {
-    for (const s of SAMPLES()) expect(s.art.svg).toContain('DEMO ONLY');
+  it('every sample item is marked SAMPLE ONLY', () => {
+    for (const s of SAMPLES()) expect(s.art.svg).toContain('SAMPLE ONLY');
   });
   it('only the blurry sample stops', () => {
     const stops = SAMPLES().filter((s) => gateResult(s.result).stop).map((s) => s.id);

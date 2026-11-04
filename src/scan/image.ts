@@ -36,3 +36,16 @@ export function grabVideoFrame(video: HTMLVideoElement): Promise<Blob> {
   canvas.getContext('2d')?.drawImage(video, 0, 0, canvas.width, canvas.height);
   return new Promise((res, rej) => canvas.toBlob((b) => (b ? res(b) : rej(new Error('frame'))), 'image/jpeg', 0.9));
 }
+
+/** Small preview for on-device history. */
+export async function makeThumb(dataUrl: string, maxEdge = 360): Promise<string> {
+  const img = new Image();
+  img.src = dataUrl;
+  await img.decode();
+  const s = Math.min(1, maxEdge / Math.max(img.naturalWidth, img.naturalHeight));
+  const c = document.createElement('canvas');
+  c.width = Math.round(img.naturalWidth * s);
+  c.height = Math.round(img.naturalHeight * s);
+  c.getContext('2d')?.drawImage(img, 0, 0, c.width, c.height);
+  return c.toDataURL('image/jpeg', 0.7);
+}

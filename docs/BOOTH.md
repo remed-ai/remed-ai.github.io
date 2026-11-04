@@ -9,16 +9,15 @@
 
 ## 2. Phone setup
 1. Charge to 100 % and keep a cable plugged in. Turn on Do Not Disturb.
-2. Open the site, then add `?showcase=1` to the address (or tap the top-left corner 5 times within 3 seconds).
+2. Open https://remed-ai.github.io/demo and tap **Start booth mode**.
 3. Tap TRY SCAN once and allow camera access. Leave it; it resets itself after 30 s idle.
 4. Screen Wake Lock keeps the screen on where supported. Also set Auto-Lock / Screen timeout to the longest value as a backup.
 5. Turn brightness up, auto-rotate off (portrait).
 6. Staff exit: hold the bottom-right corner for 5 seconds, enter PIN **2580** (`CONFIG.staffPin` in `src/config.ts`).
 
 ### iPhone (Safari)
-- Full screen: Share → Add to Home Screen → open Remed-AI from the home screen, then add `?showcase=1` (or 5-tap the corner).
+- Full screen: Share → Add to Home Screen → open Remed-AI from the home screen, then go to `/demo` and tap Start booth mode.
 - Lock to the app: Settings → Accessibility → Guided Access → On, set a passcode. Open Remed-AI, triple-click the side button → Start. Triple-click + passcode to end.
-- Tilt effects on the main site need the "Tilt to play" tap (iOS motion permission).
 
 ### Android (Chrome)
 - Full screen: Chrome menu → Add to Home screen / Install app, open it from the home screen.
@@ -31,9 +30,9 @@
 
 ## 4. Backup plan
 - No Wi-Fi or Gemini down / out of quota: the site shows "Live scan unavailable. Try a sample." Sample buttons always work offline (the site is cached after the first visit).
-- Phone fails: open the site on any phone and use the sample cards. The QR code is in the Team section.
+- Phone fails: open the site on any phone and use the sample cards. The QR code is on the /demo staff page.
 - Rate limit: one live scan every 10 seconds per device. Use the sample cards in between.
-- Judges in a hurry: main site → "Start the 2-minute tour".
+- Judges in a hurry: open https://remed-ai.github.io/judge → Start the tour.
 
 ## 5. The Gemini key (temporary demo key)
 The key lives only in the GitHub Actions secret `VITE_GEMINI_API_KEY` and is baked into the deployed site. Visitors can read it; that was a deliberate choice.

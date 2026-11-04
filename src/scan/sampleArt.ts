@@ -1,5 +1,5 @@
 /**
- * Fictional, printable sample items. Everything here is made up and marked DEMO ONLY.
+ * Fictional, printable sample items. Everything here is made up and marked SAMPLE ONLY.
  * No real brands, logos, patients, or doctors. Used in-app and by scripts/make-booth.ts.
  */
 export type ArtBox = [number, number, number, number];
@@ -43,9 +43,9 @@ function canvas(w: number, h: number) {
   return { text, raw, build, boxes };
 }
 
-const demoStamp = (c: ReturnType<typeof canvas>, x: number, y: number, rot = -12) => {
+const sampleStamp = (c: ReturnType<typeof canvas>, x: number, y: number, rot = -12) => {
   c.raw(`<g transform="rotate(${rot} ${x} ${y})"><rect x="${x - 150}" y="${y - 34}" width="300" height="56" rx="8" fill="none" stroke="#d6283a" stroke-width="5"/></g>`);
-  c.text(x, y + 6, 30, 'DEMO ONLY', { weight: 800, fill: '#d6283a', anchor: 'middle', rotate: rot, spacing: 4 });
+  c.text(x, y + 6, 30, 'SAMPLE ONLY', { weight: 800, fill: '#d6283a', anchor: 'middle', rotate: rot, spacing: 4 });
 };
 
 function blisters(c: ReturnType<typeof canvas>, x0: number, y0: number, cols: number, rows: number, gap: number, r: number) {
@@ -81,9 +81,9 @@ export function zentrovaFront(blur = 0): Art {
   c.text(40, 375, 21, 'Keep out of reach of children.', { id: 'warnings2', weight: 700, fill: '#8a1020' });
   c.text(40, 440, 22, 'B.No. DM24117', { id: 'batch' });
   c.text(260, 440, 22, 'EXP 08/2028', { id: 'expiry', weight: 700 });
-  c.text(40, 478, 18, 'Mfd. by: Demo Pharma Works (fictional)', { id: 'manufacturer', fill: '#444' });
+  c.text(40, 478, 18, 'Mfd. by: Sample Pharma Works (fictional)', { id: 'manufacturer', fill: '#444' });
   blisters(c, 600, 165, 3, 3, 105, 40);
-  demoStamp(c, 700, 470, -6);
+  sampleStamp(c, 700, 470, -6);
   const filter = blur ? `<defs><filter id="b"><feGaussianBlur stdDeviation="${blur}"/></filter></defs><g filter="url(#b)">` : '';
   const svg = c.build(filter).replace(/<\/svg>$/, blur ? '</g></svg>' : '</svg>');
   return { id: blur ? 'blurry' : 'zentrova', title: blur ? 'Blurry strip (sample)' : 'Zentrova 500 strip (front)', width: W, height: H, svg, boxes: c.boxes };
@@ -106,8 +106,8 @@ export function kelvoraBack(): Art {
   c.text(220, 420, 22, 'B.No. KV0932', { id: 'batch', anchor: 'middle' });
   c.text(450, 420, 22, 'MFG 11/2025', { anchor: 'middle' });
   c.text(680, 420, 22, 'EXP 10/2027', { id: 'expiry', anchor: 'middle', weight: 700 });
-  c.text(450, 470, 18, 'Mfd. by: Demo Pharma Works (fictional) · NOT A REAL MEDICINE', { id: 'manufacturer', anchor: 'middle', fill: '#444' });
-  demoStamp(c, 760, 120, 8);
+  c.text(450, 470, 18, 'Mfd. by: Sample Pharma Works (fictional) · NOT A REAL MEDICINE', { id: 'manufacturer', anchor: 'middle', fill: '#444' });
+  sampleStamp(c, 760, 120, 8);
   return { id: 'kelvora', title: 'Kelvora 10 strip (back)', width: W, height: H, svg: c.build(), boxes: c.boxes };
 }
 
@@ -117,10 +117,10 @@ export function prescription(): Art {
   const c = canvas(W, H);
   const hand = "'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive";
   c.raw(`<rect width="${W}" height="${H}" fill="#fffdf6"/><rect x="0" y="0" width="${W}" height="120" fill="#e9f6f2"/>`);
-  c.text(40, 58, 34, 'DEMO CLINIC', { weight: 800, fill: '#0b3d36', spacing: 3 });
-  c.text(40, 92, 18, 'Synthetic prescription for the Remed-AI demo · NOT VALID', { fill: '#355' });
-  c.text(40, 170, 20, 'Doctor: Demo Doctor (fictional)', { id: 'prescriber', fill: '#333' });
-  c.text(40, 205, 20, 'Patient: Demo Patient (fictional)', { id: 'patient', fill: '#333' });
+  c.text(40, 58, 34, 'SAMPLE CLINIC', { weight: 800, fill: '#0b3d36', spacing: 3 });
+  c.text(40, 92, 18, 'Sample prescription · fictional · NOT VALID', { fill: '#355' });
+  c.text(40, 170, 20, 'Doctor: Sample Doctor (fictional)', { id: 'prescriber', fill: '#333' });
+  c.text(40, 205, 20, 'Patient: Sample Patient (fictional)', { id: 'patient', fill: '#333' });
   c.text(520, 170, 20, 'Date: 01/11/2026', { id: 'date', fill: '#333' });
   c.raw(`<line x1="40" y1="230" x2="${W - 40}" y2="230" stroke="#9cc" stroke-width="2"/>`);
   c.text(40, 300, 64, '℞', { fill: '#0b3d36', family: 'serif' });
@@ -131,7 +131,7 @@ export function prescription(): Art {
   c.text(120, 650, 30, 'Review after 1 week', { id: 'note', family: hand, rotate: -1, fill: '#1a2a6c' });
   c.raw(`<path d="M480 780 q30 -40 60 0 t60 0 t40 -10" fill="none" stroke="#1a2a6c" stroke-width="3"/>`);
   c.text(470, 830, 18, 'Signature (fictional)', { fill: '#555' });
-  demoStamp(c, 380, 920, -4);
+  sampleStamp(c, 380, 920, -4);
   return { id: 'prescription', title: 'Synthetic prescription', width: W, height: H, svg: c.build(), boxes: c.boxes };
 }
 
@@ -148,9 +148,9 @@ export function labReport(): Art {
   const W = 820, H = 900;
   const c = canvas(W, H);
   c.raw(`<rect width="${W}" height="${H}" fill="#fff"/><rect width="${W}" height="110" fill="#eef3fb"/>`);
-  c.text(40, 60, 32, 'DEMO DIAGNOSTICS', { weight: 800, fill: '#1d3a6e', spacing: 2 });
-  c.text(40, 92, 17, 'Synthetic lab report for the Remed-AI demo · fictional patient', { fill: '#456' });
-  c.text(40, 160, 19, 'Patient: Demo Patient (fictional)   Age/Sex: 34 / F', { id: 'patient', fill: '#333' });
+  c.text(40, 60, 32, 'SAMPLE DIAGNOSTICS', { weight: 800, fill: '#1d3a6e', spacing: 2 });
+  c.text(40, 92, 17, 'Sample lab report · fictional patient', { fill: '#456' });
+  c.text(40, 160, 19, 'Patient: Sample Patient (fictional)   Age/Sex: 34 / F', { id: 'patient', fill: '#333' });
   c.text(40, 192, 19, 'Sample collected: 28/10/2026', { id: 'date', fill: '#333' });
   const cols = [40, 360, 480, 600];
   const hy = 250;
@@ -167,7 +167,7 @@ export function labReport(): Art {
   });
   c.text(40, 680, 16, 'Reference ranges are printed by the lab and may differ between labs.', { fill: '#555' });
   c.text(40, 708, 16, 'Interpret results with your doctor.', { fill: '#555' });
-  demoStamp(c, 600, 800, -5);
+  sampleStamp(c, 600, 800, -5);
   return { id: 'lab', title: 'Synthetic lab report', width: W, height: H, svg: c.build(), boxes: c.boxes };
 }
 

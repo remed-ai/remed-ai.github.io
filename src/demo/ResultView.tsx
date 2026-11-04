@@ -4,12 +4,12 @@ import { asksForDose, flagLab, gateResult, isUrgent } from '../scan/safety';
 import { doseRefusal, sampleFollowUp, OUT_OF_SCOPE } from '../scan/followup';
 import { cooldownLeft, markLiveCall } from '../scan/rateLimit';
 import { saveReport } from '../scan/reports';
-import { speak, speechSupported, stopSpeaking } from '../lib/speech';
+import { canListen, listen, speak, speechSupported, stopSpeaking } from '../lib/speech';
 import { STRINGS, type StringKey } from '../i18n/strings';
 import { useUi } from '../ui/UiContext';
 import { getLiveProvider, type ScanState } from './useScanner';
 import { UrgentHelp } from './UrgentHelp';
-import { LangBar } from './LangBar';
+import { summarize } from '../scan/summary';
 
 const CONF_DOT: Record<Confidence, string> = { high: 'bg-[#0f7b6c]', medium: 'bg-[#c98a00]', low: 'bg-[#b3121f]' };
 
@@ -35,9 +35,11 @@ interface Props {
   onAnother?: () => void;
   anotherLabel?: string;
   compact?: boolean;
+  /** Read the summary aloud as soon as the result appears. */
+  autoRead?: boolean;
 }
 
-export function ResultView({ state, onCorrect, onRescan, onAnother, anotherLabel, compact }: Props) {
+export function ResultView({ state, onCorrect, onRescan, onAnother, anotherLabel, compact, autoRead }: Props) {
   const { t, lang } = useUi();
   const r = state.result as ScanResult;
   const gate = useMemo(() => gateResult(r), [r]);
@@ -49,11 +51,11 @@ export function ResultView({ state, onCorrect, onRescan, onAnother, anotherLabel
   const boxes = useMemo(() => [...r.printed.map((p) => p.box ?? null), ...r.labValues.map((v) => v.box ?? null)], [r]);
   const selBox = sel != null ? boxes[sel] : null;
 
-  useEffect(() => () => void stopSpeaking(), []);
+  const summary = useMemo(() => summarize(r, lang), [r, lang]);
 
   const readAloud = async () => {
     const L = STRINGS[lang];
-    const lines: string[] = [];
+    const lines: string[] = [`${summary.title}.`, ...summary.lines.map((l) => `${l}.`)];
     if (gate.stop) lines.push(L.notSure);
     else {
       r.printed.forEach((p) => lines.push(`${L[`f_${p.field}` as StringKey]}: ${p.value}.`));
@@ -65,12 +67,18 @@ export function ResultView({ state, onCorrect, onRescan, onAnother, anotherLabel
     setVoiceMsg(ok ? '' : t('noVoice', { lang: STRINGS[lang].langName }));
   };
 
+  useEffect(() => {
+    if (autoRead) void readAloud();
+    return () => void stopSpeaking();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [r]);
+
   return (
     <div className={`grid gap-4 ${compact ? '' : 'lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]'}`} data-testid="result">
       {urgent && <UrgentHelp onClose={() => setUrgent(false)} />}
       {state.image && (
-        <figure className="relative self-start overflow-hidden rounded-3xl bg-white/5 ring-1 ring-white/10">
-          <figcaption className="absolute left-3 top-3 z-10 rounded-full bg-black/70 px-3 py-1 text-sm text-white">{t('original')}</figcaption>
+        <figure className="card relative self-start overflow-hidden">
+          <figcaption className="absolute bottom-2 left-2 z-10 rounded-full bg-ink/70 px-2.5 py-0.5 text-xs text-white">{t('original')}</figcaption>
           <div className="relative w-full" style={{ aspectRatio: String(state.aspect) }}>
             <img src={state.image} alt={t('original')} className="absolute inset-0 size-full object-contain" />
             {selBox && (
@@ -85,25 +93,29 @@ export function ResultView({ state, onCorrect, onRescan, onAnother, anotherLabel
         </figure>
       )}
 
-      <article className="paper rounded-3xl p-5 sm:p-7" aria-live="polite">
+      <article className="card p-5 sm:p-7" aria-live="polite">
         <header className="flex flex-wrap items-center gap-2">
           <span className={`badge ${state.source === 'sample' ? 'badge-sample' : 'badge-live'}`} data-testid="result-source">
             {state.source === 'sample' ? t('sampleResult') : t('liveResult')}
           </span>
           {!gate.stop && <ConfBadge c={r.overallConfidence} />}
         </header>
-        <p className="mt-1 text-sm font-semibold text-black/60">Not professional medical advice.{lang !== 'en' && ` · ${t('notAdvice')}`}</p>
-
-        <div className="mt-3"><LangBar /></div>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {speechSupported() && (
-            <>
-              <button type="button" className="btn-quiet" onClick={readAloud}>🔊 {t('readAloud')}</button>
-              <button type="button" className="btn-quiet" onClick={() => stopSpeaking()}>{t('stop')}</button>
-            </>
-          )}
-        </div>
-        {(voiceMsg || !speechSupported()) && <p role="status" className="mt-2 text-sm text-black/70">{voiceMsg || t('noVoice', { lang: STRINGS[lang].langName })}</p>}
+        <section className="mt-3 rounded-2xl bg-sand/70 p-4" data-testid="summary">
+          <h2 className="text-2xl font-bold leading-tight">{summary.title}</h2>
+          <ul className="mt-2 space-y-1 text-lg">
+            {summary.lines.map((l, i) => <li key={i}>{l}</li>)}
+          </ul>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {speechSupported() && (
+              <>
+                <button type="button" className="btn-ink" onClick={readAloud} data-testid="read-aloud">🔊 {t('readAloud')}</button>
+                <button type="button" className="btn-quiet" onClick={() => stopSpeaking()}>{t('stop')}</button>
+              </>
+            )}
+          </div>
+          {(voiceMsg || !speechSupported()) && <p role="status" className="mt-2 text-sm text-muted">{voiceMsg || t('noVoice', { lang: STRINGS[lang].langName })}</p>}
+        </section>
+        <p className="mt-2 text-sm font-semibold text-muted">Not professional medical advice.{lang !== 'en' && ` · ${t('notAdvice')}`}</p>
 
         {state.interaction && (
           <div className="mt-4 rounded-2xl border border-[#c98a00]/50 bg-[#fff4d6] p-4" role="note" data-testid="interaction">
@@ -247,9 +259,8 @@ function FollowUp({ result, source, onUrgent }: { result: ScanResult; source: 's
   const [ans, setAns] = useState<FollowUpAnswer | null>(null);
   const [note, setNote] = useState('');
 
-  const submit = async (e: FormEvent) => {
-    e.preventDefault();
-    const question = q.trim();
+  const [hearing, setHearing] = useState(false);
+  const ask = async (question: string) => {
     if (!question) return;
     setNote('');
     if (isUrgent(question)) return onUrgent();
@@ -269,6 +280,10 @@ function FollowUp({ result, source, onUrgent }: { result: ScanResult; source: 's
       setBusy(false);
     }
   };
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    void ask(q.trim());
+  };
 
   return (
     <section className="mt-6">
@@ -276,6 +291,12 @@ function FollowUp({ result, source, onUrgent }: { result: ScanResult; source: 's
       <p className="text-sm text-black/60">{t('askHint')}</p>
       <form onSubmit={submit} className="mt-2 flex flex-wrap gap-2">
         <input value={q} onChange={(e) => setQ(e.target.value)} className="field min-w-0 flex-1" placeholder={t('askPlaceholder')} aria-label={t('askTitle')} maxLength={300} data-testid="ask-input" />
+        {canListen() && (
+          <button type="button" className="btn-quiet" aria-pressed={hearing} aria-label={t('speak')} data-testid="mic"
+            onClick={async () => { setHearing(true); const heard = await listen(lang); setHearing(false); if (heard) { setQ(heard); void ask(heard); } }}>
+            🎤 {hearing ? t('listening') : t('speak')}
+          </button>
+        )}
         <button className="btn-ink" type="submit" disabled={busy}>{busy ? '…' : t('ask')}</button>
       </form>
       {note && <p className="mt-2 text-sm" role="status">{note}</p>}

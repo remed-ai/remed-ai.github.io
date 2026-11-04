@@ -9,7 +9,7 @@ export function UrgentHelp({ onClose }: { onClose: () => void }) {
   useEffect(() => ref.current?.focus(), []);
   return (
     <div className="fixed inset-0 z-[90] grid place-items-center bg-black/70 p-4" role="alertdialog" aria-modal="true" aria-labelledby="urgent-title" aria-describedby="urgent-body">
-      <div className="paper w-full max-w-md rounded-3xl p-6 shadow-2xl" data-testid="urgent-help">
+      <div className="card w-full max-w-md p-6" data-testid="urgent-help">
         <h2 id="urgent-title" className="text-3xl font-extrabold text-[#9b1020]">{t('urgentTitle')}</h2>
         <p id="urgent-body" className="mt-3 text-lg leading-relaxed">{t('urgentBody')}</p>
         <p className="mt-2 text-base text-black/70">{t('urgentNoInfo')}</p>

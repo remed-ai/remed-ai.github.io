@@ -1,7 +1,8 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { geminiKey, geminiModel } from '../config';
 import { GeminiProvider } from '../scan/gemini';
-import { prepareImage } from '../scan/image';
+import { makeThumb, prepareImage } from '../scan/image';
+import { saveHistory, type HistoryItem } from '../scan/history';
 import { LiveUnavailableError, type ScanProvider } from '../scan/provider';
 import { cooldownLeft, markLiveCall } from '../scan/rateLimit';
 import { medicineNames, sampleInteraction } from '../scan/followup';
@@ -28,7 +29,8 @@ const EMPTY: ScanState = { phase: 'idle', source: 'sample', image: null, aspect:
 let liveProvider: ScanProvider | null = null;
 export const getLiveProvider = () => (liveProvider ??= new GeminiProvider(geminiKey(), geminiModel()));
 
-export function useScanner() {
+export function useScanner(opts: { history?: boolean } = {}) {
+  const keepHistory = opts.history ?? false;
   const [s, setS] = useState<ScanState>(EMPTY);
   const seen = useRef<string[]>([]);
   const abort = useRef<AbortController | null>(null);
@@ -36,6 +38,16 @@ export function useScanner() {
   const finish = useCallback((base: Partial<ScanState>, result: ScanResult) => {
     seen.current = [...seen.current, ...medicineNames(result)];
     setS((p) => ({ ...p, ...base, phase: 'result', result, interaction: sampleInteraction(seen.current) }));
+    if (!keepHistory) return;
+    const item = { source: base.source ?? 'sample', sampleId: base.sampleId ?? undefined, aspect: base.aspect ?? 1, result };
+    if (base.source === 'live' && base.image) {
+      void makeThumb(base.image).then((thumb) => saveHistory({ ...item, thumb })).catch(() => saveHistory(item));
+    } else saveHistory(item);
+  }, [keepHistory]);
+
+  /** Show a saved scan from history. */
+  const open = useCallback((h: HistoryItem, image: string | null) => {
+    setS({ ...EMPTY, phase: 'result', source: h.source, image, aspect: h.aspect, result: h.result, sampleId: (h.sampleId as Sample['id']) ?? null });
   }, []);
 
   const runSample = useCallback(
@@ -103,6 +115,6 @@ export function useScanner() {
     setS(EMPTY);
   }, []);
 
-  return useMemo(() => ({ state: s, runSample, runLive, correct, back, reset }), [s, runSample, runLive, correct, back, reset]);
+  return useMemo(() => ({ state: s, runSample, runLive, correct, back, reset, open }), [s, runSample, runLive, correct, back, reset, open]);
 }
 export type Scanner = ReturnType<typeof useScanner>;

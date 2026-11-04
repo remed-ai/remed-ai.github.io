@@ -64,16 +64,16 @@ function build(): Sample[] {
           { field: 'directions', value: 'Dosage: As directed by the physician.', confidence: 'high', box: box(zen, 'directions') },
           { field: 'warnings', value: 'Do not exceed the stated dose. Keep out of reach of children.', confidence: 'high', box: mergeBox(zen, 'warnings', 'warnings2') },
           { field: 'batch', value: 'B.No. DM24117', confidence: 'medium', box: box(zen, 'batch') },
-          { field: 'manufacturer', value: 'Mfd. by: Demo Pharma Works (fictional)', confidence: 'medium', box: box(zen, 'manufacturer') },
+          { field: 'manufacturer', value: 'Mfd. by: Sample Pharma Works (fictional)', confidence: 'medium', box: box(zen, 'manufacturer') },
         ],
         labValues: [],
         explanations: [
           {
             topic: 'Zentrofen',
             text: t(
-              'Zentrofen is a fictional ingredient made for this demo. For a real medicine, this space gives a short, general description of the printed ingredient.',
-              'ज़ेंट्रोफ़ेन इस डेमो के लिए बनाया गया काल्पनिक घटक है। असली दवा के लिए यहाँ छपे हुए घटक का छोटा, सामान्य विवरण दिखता है।',
-              'ਜ਼ੈਂਟ੍ਰੋਫ਼ੈਨ ਇਸ ਡੈਮੋ ਲਈ ਬਣਾਇਆ ਕਾਲਪਨਿਕ ਤੱਤ ਹੈ। ਅਸਲੀ ਦਵਾਈ ਲਈ ਇੱਥੇ ਛਪੇ ਤੱਤ ਦਾ ਛੋਟਾ, ਆਮ ਵੇਰਵਾ ਦਿਖਦਾ ਹੈ।',
+              'Zentrofen is a fictional ingredient made up for this sample. For a real medicine, this space gives a short, general description of the printed ingredient.',
+              'ज़ेंट्रोफ़ेन इस नमूने के लिए बनाया गया काल्पनिक घटक है। असली दवा के लिए यहाँ छपे हुए घटक का छोटा, सामान्य विवरण दिखता है।',
+              'ਜ਼ੈਂਟ੍ਰੋਫ਼ੈਨ ਇਸ ਨਮੂਨੇ ਲਈ ਬਣਾਇਆ ਕਾਲਪਨਿਕ ਤੱਤ ਹੈ। ਅਸਲੀ ਦਵਾਈ ਲਈ ਇੱਥੇ ਛਪੇ ਤੱਤ ਦਾ ਛੋਟਾ, ਆਮ ਵੇਰਵਾ ਦਿਖਦਾ ਹੈ।',
             ),
           },
           { topic: 'Directions', text: noDose },
@@ -105,9 +105,9 @@ function build(): Sample[] {
           {
             topic: 'Kelvoxin',
             text: t(
-              'Kelvoxin is a fictional ingredient made for this demo. For a real medicine, this space gives a short, general description of the printed ingredient.',
-              'केल्वॉक्सिन इस डेमो के लिए बनाया गया काल्पनिक घटक है। असली दवा के लिए यहाँ छपे हुए घटक का छोटा, सामान्य विवरण दिखता है।',
-              'ਕੈਲਵੌਕਸਿਨ ਇਸ ਡੈਮੋ ਲਈ ਬਣਾਇਆ ਕਾਲਪਨਿਕ ਤੱਤ ਹੈ। ਅਸਲੀ ਦਵਾਈ ਲਈ ਇੱਥੇ ਛਪੇ ਤੱਤ ਦਾ ਛੋਟਾ, ਆਮ ਵੇਰਵਾ ਦਿਖਦਾ ਹੈ।',
+              'Kelvoxin is a fictional ingredient made up for this sample. For a real medicine, this space gives a short, general description of the printed ingredient.',
+              'केल्वॉक्सिन इस नमूने के लिए बनाया गया काल्पनिक घटक है। असली दवा के लिए यहाँ छपे हुए घटक का छोटा, सामान्य विवरण दिखता है।',
+              'ਕੈਲਵੌਕਸਿਨ ਇਸ ਨਮੂਨੇ ਲਈ ਬਣਾਇਆ ਕਾਲਪਨਿਕ ਤੱਤ ਹੈ। ਅਸਲੀ ਦਵਾਈ ਲਈ ਇੱਥੇ ਛਪੇ ਤੱਤ ਦਾ ਛੋਟਾ, ਆਮ ਵੇਰਵਾ ਦਿਖਦਾ ਹੈ।',
             ),
           },
           {
@@ -137,8 +137,8 @@ function build(): Sample[] {
           { field: 'name', value: 'Tab. Kelvora 10', confidence: 'medium', box: box(rx, 'med2') },
           { field: 'directions', value: '0 – 0 – 1 at night × 10 days', confidence: 'medium', box: box(rx, 'dir2') },
           { field: 'other', value: 'Review after 1 week', confidence: 'medium', box: box(rx, 'note') },
-          { field: 'prescriber', value: 'Demo Doctor (fictional)', confidence: 'high', box: box(rx, 'prescriber') },
-          { field: 'patient', value: 'Demo Patient (fictional)', confidence: 'high', box: box(rx, 'patient') },
+          { field: 'prescriber', value: 'Sample Doctor (fictional)', confidence: 'high', box: box(rx, 'prescriber') },
+          { field: 'patient', value: 'Sample Patient (fictional)', confidence: 'high', box: box(rx, 'patient') },
           { field: 'date', value: '01/11/2026', confidence: 'high', box: box(rx, 'date') },
         ],
         labValues: [],
@@ -174,7 +174,7 @@ function build(): Sample[] {
       result: {
         kind: 'lab_report', overallConfidence: 'high', imageQuality: 'clear', looseTablet: false, similarNameConflict: false,
         printed: [
-          { field: 'patient', value: 'Demo Patient (fictional)', confidence: 'high', box: box(lab, 'patient') },
+          { field: 'patient', value: 'Sample Patient (fictional)', confidence: 'high', box: box(lab, 'patient') },
           { field: 'date', value: 'Sample collected: 28/10/2026', confidence: 'high', box: box(lab, 'date') },
         ],
         labValues: LAB_ROWS.map((r, k) => ({

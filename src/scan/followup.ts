@@ -74,9 +74,9 @@ export function sampleInteraction(names: string[]): Tri | null {
   const all = names.join(' ').toLowerCase();
   if (/zentro/.test(all) && /kelvo/.test(all)) {
     return tri(
-      'Sample interaction warning: in this fictional demo, Zentrova 500 and Kelvora 10 are set up to interact. With real medicines, check with a pharmacist before taking two medicines together.',
-      'नमूना इंटरैक्शन चेतावनी: इस काल्पनिक डेमो में ज़ेंट्रोवा 500 और केल्वोरा 10 को आपस में असर करने वाला दिखाया गया है। असली दवाओं के लिए, दो दवाएँ साथ लेने से पहले फार्मासिस्ट से पूछें।',
-      'ਨਮੂਨਾ ਇੰਟਰੈਕਸ਼ਨ ਚੇਤਾਵਨੀ: ਇਸ ਕਾਲਪਨਿਕ ਡੈਮੋ ਵਿੱਚ ਜ਼ੈਂਟ੍ਰੋਵਾ 500 ਅਤੇ ਕੈਲਵੋਰਾ 10 ਨੂੰ ਆਪਸ ਵਿੱਚ ਅਸਰ ਕਰਨ ਵਾਲਾ ਦਿਖਾਇਆ ਗਿਆ ਹੈ। ਅਸਲੀ ਦਵਾਈਆਂ ਲਈ, ਦੋ ਦਵਾਈਆਂ ਇਕੱਠੀਆਂ ਲੈਣ ਤੋਂ ਪਹਿਲਾਂ ਫਾਰਮਾਸਿਸਟ ਨੂੰ ਪੁੱਛੋ।',
+      'Sample interaction warning: in this fictional sample, Zentrova 500 and Kelvora 10 are set up to interact. With real medicines, check with a pharmacist before taking two medicines together.',
+      'नमूना इंटरैक्शन चेतावनी: इस काल्पनिक नमूने में ज़ेंट्रोवा 500 और केल्वोरा 10 को आपस में असर करने वाला दिखाया गया है। असली दवाओं के लिए, दो दवाएँ साथ लेने से पहले फार्मासिस्ट से पूछें।',
+      'ਨਮੂਨਾ ਇੰਟਰੈਕਸ਼ਨ ਚੇਤਾਵਨੀ: ਇਸ ਕਾਲਪਨਿਕ ਨਮੂਨੇ ਵਿੱਚ ਜ਼ੈਂਟ੍ਰੋਵਾ 500 ਅਤੇ ਕੈਲਵੋਰਾ 10 ਨੂੰ ਆਪਸ ਵਿੱਚ ਅਸਰ ਕਰਨ ਵਾਲਾ ਦਿਖਾਇਆ ਗਿਆ ਹੈ। ਅਸਲੀ ਦਵਾਈਆਂ ਲਈ, ਦੋ ਦਵਾਈਆਂ ਇਕੱਠੀਆਂ ਲੈਣ ਤੋਂ ਪਹਿਲਾਂ ਫਾਰਮਾਸਿਸਟ ਨੂੰ ਪੁੱਛੋ।',
     );
   }
   return null;
