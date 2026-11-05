@@ -5,10 +5,10 @@ Updated: 2026-11-05
 Live: https://remed-ai.github.io/
 
 ## What works (locally verified)
-- Paper-and-ink redesign based on the earlier RemedAI app: Home (quote + scan card + recent), Scan (viewfinder), results with read-aloud bar, History, My Medicines, Settings.
-- Samples via /scan?sample=<id>. Booth mode (/demo) and judge tour (/judge) were removed; those links open Home.
+- Welcome screen on first visit (/welcome; reopen from Settings), then the app: Home (quote + scan card + recent), Scan (viewfinder), results with read-aloud bar, History, My Medicines, Settings.
+- Samples via /scan?sample=<id>, and as a fallback when live scanning fails.
 - Live Gemini with Zod validation, retries and model fallback.
-- 62 unit tests, 12 Playwright phone tests, 28 guard checks pass.
+- 62 unit tests, 13 Playwright phone tests, 28 guard checks pass.
 
 ## Known bugs
 - None open. Hindi and Punjabi wording not yet human-reviewed.
@@ -22,4 +22,4 @@ Live: https://remed-ai.github.io/
 3. Human review of Hindi and Punjabi strings.
 
 ## Last working commit
-`2c78206`: Simple Mode, Settings About, booth mode and judge tour removed; lint, typecheck, 62 unit tests and 12 phone e2e tests pass locally. Earlier deploy + smoke test passed at `9ccd541`; check the latest "Test and deploy" run.
+`bec5003`: welcome screen added, competition traces removed; lint, typecheck, 62 unit tests, 13 phone e2e tests and 28 guard checks pass locally. Earlier deploy + smoke test passed at `9ccd541`; check the latest "Test and deploy" run.
