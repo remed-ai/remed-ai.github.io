@@ -22,4 +22,4 @@ Live: https://remed-ai.github.io/
 3. Human review of Hindi and Punjabi strings.
 
 ## Last working commit
-`bec5003`: welcome screen added, competition traces removed; lint, typecheck, 62 unit tests, 13 phone e2e tests and 28 guard checks pass locally. Earlier deploy + smoke test passed at `9ccd541`; check the latest "Test and deploy" run.
+`cefecb4`: welcome screen (no hero image) added, competition traces removed; lint, typecheck, 62 unit tests, 13 phone e2e tests and 28 guard checks pass locally. Earlier deploy + smoke test passed at `9ccd541`; check the latest "Test and deploy" run.
