@@ -39,7 +39,7 @@ interface Props {
   anotherLabel?: string;
   compact?: boolean;
   autoRead?: boolean;
-  /** Hide the "save to My Medicines" action (booth mode). */
+  /** Hide the "save to My Medicines" action. */
   noSave?: boolean;
 }
 

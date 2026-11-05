@@ -3,9 +3,9 @@
 Read `docs/STATUS.md` first.
 
 ## Product
-Demo website that scans medicine strips (front and back), prescriptions, lab reports and other medical documents, then explains them in plain language in English, Hindi and Punjabi. Always shows: "Not professional medical advice." First audience: competition judges and booth visitors using a phone on a table.
+Website that scans medicine strips (front and back), prescriptions, lab reports and other medical documents, then explains them in plain language in English, Hindi and Punjabi. Always shows: "Not professional medical advice." Built for everyday users on a phone; first visit opens a welcome screen.
 
-Repo `remed-ai/remed-ai.github.io` → live at https://remed-ai.github.io/ Pages: `/` home, `/scan`, `/history`, `/medicines`, `/settings`. Samples: `/scan?sample=<id>`.
+Repo `remed-ai/remed-ai.github.io` → live at https://remed-ai.github.io/ Pages: `/welcome` (shown at `/` on first visit), `/` home, `/scan`, `/history`, `/medicines`, `/settings`. Samples: `/scan?sample=<id>`.
 
 ## Git rules (enforced by `.claude/hooks/guard-git.mjs` and `.githooks/pre-push`)
 - Work and push only on `main`. Never create branches, worktrees, PRs, or tags. No `/batch`, agent teams, or background agents.
@@ -25,7 +25,7 @@ Repo `remed-ai/remed-ai.github.io` → live at https://remed-ai.github.io/ Pages
 | Build | `npm run build` (CI sets `BASE_PATH`) |
 | Phone e2e | `npm run build && npm run e2e` (one test: `npx playwright test -g "blurry"`) |
 | Guard hook tests | `node scripts/test-guards.mjs` |
-| Regenerate printable sample items/icons | `node scripts/make-booth.ts --icons` |
+| Regenerate app icons | `node scripts/make-icons.ts` |
 | Live Gemini check | GitHub Actions → "Gemini live check (manual)" |
 
 Playwright is pinned to 1.63.0 to match the preinstalled Chromium. Do not run `playwright install` locally.
@@ -46,11 +46,10 @@ The Gemini key is the Actions secret `VITE_GEMINI_API_KEY`, injected only in the
 - `docs/STATUS.md` — current state, bugs, next tasks (read first)
 - `docs/ARCHITECTURE.md` — system map (read only when needed)
 - `docs/SAFETY.md` — medical and privacy rules
-- `docs/BOOTH.md` — printing, phone setup, key rotation, backup plan
+- `docs/OPERATIONS.md` — Gemini key rotation, redeploy, model choice
 - `docs/ROADMAP.md` — every feature: Live / Sample / Planned / Blocked
 - `docs/DECISIONS.md` — what and why
 - `docs/LATER-SETUP.md` — backend key, `remedai.in` domain
-- `docs/MASTER_PROMPT.md` — original brief
 
 ## Working style
 Search with `rg` before opening files; read only needed ranges. Don't read `node_modules`, `dist`, lockfiles or generated files. Run the narrowest test. After two failed attempts at one fix, change approach.

@@ -5,7 +5,7 @@ Goal: the key never reaches the browser.
 1. Create a small serverless function (for example Cloudflare Workers or Google Cloud Run) with one route `POST /scan` and one `POST /followup`.
 2. Store the key as a server secret there. Add per-IP rate limiting and a request size limit (images already arrive downscaled).
 3. Move the body of `GeminiClient` (`src/scan/gemini.ts`) to the server unchanged; keep Zod validation on both sides.
-4. Add a `BackendProvider` implementing `ScanProvider` (`src/scan/provider.ts`) that calls the function. Select it in `getLiveProvider()` (`src/demo/useScanner.ts`).
+4. Add a `BackendProvider` implementing `ScanProvider` (`src/scan/provider.ts`) that calls the function. Select it in `getLiveProvider()` (`src/scanner/useScanner.ts`).
 5. Remove `VITE_GEMINI_API_KEY` from the deploy workflow and delete the GitHub secret. Delete the old key in Google AI Studio.
 6. Update the privacy text in `src/sections/Info.tsx` and `docs/SAFETY.md`.
 

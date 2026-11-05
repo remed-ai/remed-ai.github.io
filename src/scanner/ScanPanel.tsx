@@ -10,7 +10,7 @@ import type { Scanner } from './useScanner';
 
 export const CONSENT_KEY = 'remed.consent';
 
-/** Sample items as quiet list rows (used only as a fallback and in staff modes). */
+/** Sample items as quiet list rows (used as a fallback when live scanning fails). */
 export function SampleChips({ onPick, prefix = 'sample' }: { onPick: (id: Sample['id']) => void; prefix?: string }) {
   const { lang } = useUi();
   return (

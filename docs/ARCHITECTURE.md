@@ -1,12 +1,13 @@
 # Architecture
 
-Static Vite + React + TypeScript + Tailwind site (paper-and-ink design from the earlier RemedAI app) on GitHub Pages. No backend. Live scans call Google Gemini directly from the browser with a temporary demo key.
+Static Vite + React + TypeScript + Tailwind site (paper-and-ink design from the earlier RemedAI app) on GitHub Pages. No backend. Live scans call Google Gemini directly from the browser with a browser-side key (see DECISIONS.md).
 
 ```
 index.html → src/main.tsx (UiProvider prefs, PWA) → src/App.tsx (lib/router.tsx; 404.html = index.html on Pages)
   ui/AppShell.tsx  sticky header (brand) + bottom nav (Home, History, My Medicines, Settings)
+  /welcome      pages/Welcome.tsx        first-run welcome (also at / until "Get started"; flag remed.welcomed)
   /             pages/Home.tsx           time-of-day quote (i18n/quotes.ts), scan card, recently explained
-  /scan         pages/ScanPage.tsx       demo/ScanDemo.tsx ScanPanel: privacy note → Camera → reading → ResultView
+  /scan         pages/ScanPage.tsx       scanner/ScanPanel.tsx: privacy note → Camera → reading → ResultView
                                          ?sample=<id> opens a prepared sample result
   /history      pages/HistoryPage.tsx    on-device history (scan/history.ts), /history/:id detail
   /medicines    pages/MedicinesPage.tsx  saved medicines + expiry status (scan/medicines.ts)
@@ -28,7 +29,7 @@ Any live failure → `LiveUnavailableError` → "Live scan unavailable. Try a sa
 If the configured model returns 404, `pickVisionModel()` chooses one from the Gemini model list.
 
 ## State
-- `demo/useScanner.ts` — phase, image, result, corrections, sample interaction history.
+- `scanner/useScanner.ts` — phase, image, result, corrections, sample interaction history.
 - `ui/UiContext.tsx` — persisted prefs: language, high contrast, voice speed, text scale. `ui/icons.tsx` — line icons.
 - `scan/summary.ts` — plain summary built only from printed text. `lib/speech.ts` — read aloud + voice questions.
 - `i18n/strings.ts` — UI strings; Hindi/Punjabi need human review.
@@ -39,4 +40,4 @@ If the configured model returns 404, `pickVisionModel()` chooses one from the Ge
 `.github/workflows/gemini-check.yml`: manual live Gemini check with a synthetic image (`checks/gemini-live.check.ts`).
 
 ## Assets
-All art is SVG/CSS: sample items are generated into `public/booth/` by `scripts/make-booth.ts`. Fonts: Fraunces (display), Atkinson Hyperlegible (body), Noto Sans Devanagari/Gurmukhi, self-hosted via @fontsource.
+All art is SVG/CSS: fictional sample items are drawn in `src/scan/sampleArt.ts`; app icons come from `scripts/make-icons.ts`. Fonts: Fraunces (display), Atkinson Hyperlegible (body), Noto Sans Devanagari/Gurmukhi, self-hosted via @fontsource.

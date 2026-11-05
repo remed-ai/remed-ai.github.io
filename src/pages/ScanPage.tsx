@@ -1,5 +1,5 @@
-import { ScanPanel } from '../demo/ScanDemo';
-import { useScanner } from '../demo/useScanner';
+import { ScanPanel } from '../scanner/ScanPanel';
+import { useScanner } from '../scanner/useScanner';
 import { AppShell } from '../ui/AppShell';
 import { useUi } from '../ui/UiContext';
 

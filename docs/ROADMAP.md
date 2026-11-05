@@ -4,7 +4,7 @@ Status key: **Live** (works on the site with Gemini), **Sample** (prepared/offli
 
 | Feature | Status | Notes |
 |---|---|---|
-| Medicine strip front scan | Live | Needs the demo key; falls back to samples |
+| Medicine strip front scan | Live | Needs the Gemini key; falls back to samples |
 | Back of strip scan | Live | |
 | Prescription scan (handwriting) | Live | Medium confidence + pharmacist reminder |
 | Lab report scan, flags vs printed range | Live | Flags computed on device from the printed range |
@@ -19,17 +19,16 @@ Status key: **Live** (works on the site with Gemini), **Sample** (prepared/offli
 | English / Hindi / Punjabi switching | Live | **Hindi and Punjabi text needs human review** |
 | Read aloud | Live | Depends on device voices; says when missing |
 | Large text | Live | |
-| Sample items and results | Sample | Fictional, DEMO ONLY |
+| Sample items and results | Sample | Fictional, marked SAMPLE ONLY |
 | Blurry "I'm not sure" sample | Sample | |
 | Interaction warning | Sample | Only between the two fictional medicines |
-| Booth / kiosk mode (`/demo`) | Removed | Owner request |
+| Welcome screen | Live | First visit; reopen from Settings |
 | Plain summary of each scan | Live | Built only from printed text |
 | Scan history (on device) | Live | Up to 30, clearable |
 | My Medicines (saved printed details + expiry status) | Live | On device; no reminders yet |
 | High contrast, voice speed, text size | Live | Settings page |
 | Voice questions (speech input) | Live | Where the browser supports it |
-| Offline attract screen (PWA) | Live | |
-| Two-minute judge tour (`/judge`) | Removed | Owner request |
+| Works offline after first visit (PWA) | Live | |
 | Root URL https://remed-ai.github.io/ | Live | Repo renamed to `remed-ai.github.io` |
 | Backend key storage | Planned | See LATER-SETUP.md |
 | Real drug database | Planned | |

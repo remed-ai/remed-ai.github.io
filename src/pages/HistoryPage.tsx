@@ -4,7 +4,7 @@ import { clearHistory, deleteHistory, getHistory, listHistory, type HistoryItem 
 import { sampleById } from '../scan/samples';
 import { svgDataUrl } from '../scan/sampleArt';
 import { summarize } from '../scan/summary';
-import { ResultView } from '../demo/ResultView';
+import { ResultView } from '../scanner/ResultView';
 import { AppShell } from '../ui/AppShell';
 import { useUi } from '../ui/UiContext';
 import { IconHistory, IconTrash } from '../ui/icons';

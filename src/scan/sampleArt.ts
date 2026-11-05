@@ -1,6 +1,6 @@
 /**
- * Fictional, printable sample items. Everything here is made up and marked SAMPLE ONLY.
- * No real brands, logos, patients, or doctors. Used in-app and by scripts/make-booth.ts.
+ * Fictional sample items. Everything here is made up and marked SAMPLE ONLY.
+ * No real brands, logos, patients, or doctors.
  */
 export type ArtBox = [number, number, number, number];
 export interface Art {

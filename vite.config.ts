@@ -12,13 +12,13 @@ export default defineConfig({
   base,
   plugins: [
     react(),
-    // GitHub Pages serves 404.html for unknown paths, so /scan, /history, /demo work on reload.
+    // GitHub Pages serves 404.html for unknown paths, so /scan, /history work on reload.
     { name: 'spa-404', apply: 'build', closeBundle: () => copyFileSync(resolve('dist/index.html'), resolve('dist/404.html')) },
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
-      includeAssets: ['icon.svg', 'booth/*.svg', 'booth/*.html'],
+      includeAssets: ['icon.svg'],
       manifest: {
         name: 'Remed-AI',
         short_name: 'Remed-AI',

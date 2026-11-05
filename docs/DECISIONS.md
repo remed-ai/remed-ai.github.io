@@ -1,6 +1,6 @@
 # Decisions
 
-**Browser-side Gemini key (temporary).** The owner chose a free demo key used directly from the browser, accepting that visitors can read it. No backend. Mitigations: key only in the Actions secret and injected only in the deploy build; 10 s per-device rate limit; downscaled images; key to be deleted after the competition (BOOTH.md). Moving to a backend is Planned (LATER-SETUP.md).
+**Browser-side Gemini key (temporary).** The owner chose a free key used directly from the browser, accepting that users can read it. No backend. Mitigations: key only in the Actions secret and injected only in the deploy build; 10 s per-device rate limit; downscaled images; rotation and revocation steps in OPERATIONS.md. Moving to a backend is Planned (LATER-SETUP.md).
 
 **Base path from repo name.** The repo started as `remed-ai/Remed-ai` and was renamed to `remed-ai.github.io` so the site lives at the root. The deploy workflow still derives `BASE_PATH` from the repo name (`/` for `<owner>.github.io`, `/<repo>/` otherwise), so a future rename cannot break asset paths.
 
@@ -30,4 +30,4 @@
 
 **Design taken from the earlier RemedAI app (owner request).** Paper-and-ink palette, turmeric marigold accent, rubber-stamp teal, brick for warnings; Fraunces + Atkinson Hyperlegible; dog-eared cards; highlighter stroke behind the result title; bottom navigation; high contrast. No emojis: line icons only. Samples are not offered on the normal scan screen; they appear only as a fallback when live scanning fails, and via `/scan?sample=<id>`.
 
-**Booth mode and judge tour removed (owner request).** The hidden `/demo` kiosk and `/judge` tour are gone; old links fall through to Home. Printable sample items stay at `/booth/print.html`.
+**Product framing with a welcome screen (owner request).** Remed-AI is presented as a product. First visit shows `/welcome` (what it does, languages, limits, privacy) with one "Get started" button; after that `/` opens the app directly. Settings can reopen it.
