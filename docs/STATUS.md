@@ -22,4 +22,4 @@ Live: https://remed-ai.github.io/ · Booth: /demo (PIN 2580) · Judges: /judge
 3. Human review of Hindi and Punjabi strings.
 
 ## Last working commit
-`9ccd541`: deploy + smoke test passed on main (https://remed-ai.github.io/). Later fallback fixes are pushed; check the latest "Test and deploy" run.
+`1069a25`: Simple Mode removed; lint, typecheck, 62 unit tests and 16 phone e2e tests pass locally. Earlier deploy + smoke test passed at `9ccd541`; check the latest "Test and deploy" run.
