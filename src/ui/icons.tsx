@@ -21,7 +21,6 @@ export const IconWarn = (p: P) => <S {...p}><path d="M12 3 2 21h20z" /><path d="
 export const IconFlag = (p: P) => <S {...p}><path d="M5 21V4h11l-1.5 4L16 12H5" /></S>;
 export const IconCheck = (p: P) => <S {...p}><path d="m5 12 5 5 9-10" /></S>;
 export const IconTrash = (p: P) => <S {...p}><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13" /></S>;
-export const IconLines = (p: P) => <S {...p}><path d="M4 12h16M4 6h16M4 18h10" /></S>;
 export const IconPhone = (p: P) => <S {...p}><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" /></S>;
 export const IconPlus = (p: P) => <S {...p}><path d="M12 5v14M5 12h14" /></S>;
 

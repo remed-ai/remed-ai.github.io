@@ -105,10 +105,10 @@ test('a scanned medicine can be saved to My Medicines', async ({ page }) => {
   await expect(page.getByTestId('meds-list')).toContainText('EXP 10/2027');
 });
 
-test('settings switch language and Simple Mode', async ({ page }) => {
+test('settings switch language and high contrast', async ({ page }) => {
   await page.goto('./settings');
   await page.getByRole('radio', { name: 'ਪੰਜਾਬੀ' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('ਸੈਟਿੰਗਾਂ');
   await page.getByRole('switch').first().click();
-  await expect(page.locator('html')).toHaveClass(/simple-mode/);
+  await expect(page.locator('html')).toHaveClass(/high-contrast/);
 });

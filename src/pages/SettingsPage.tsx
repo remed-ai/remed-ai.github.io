@@ -9,7 +9,7 @@ function Switch({ on, onChange, label }: { on: boolean; onChange: (b: boolean) =
 }
 
 export function SettingsPage() {
-  const { t, lang, setLang, simple, contrast, rate, scale, set } = useUi();
+  const { t, lang, setLang, contrast, rate, scale, set } = useUi();
   const pill = (on: boolean) => `min-h-[46px] rounded-full border-[1.5px] px-4 font-bold ${on ? 'border-ink bg-ink text-raised' : 'border-line bg-raised'}`;
   return (
     <AppShell title={t('settingsTitle')}>
@@ -24,10 +24,6 @@ export function SettingsPage() {
 
       <section className="border-b border-line py-5">
         <h2 className="eyebrow mb-1">{t('accessibility')}</h2>
-        <div className="flex items-center justify-between gap-4 py-3">
-          <div><p className="m-0 font-bold">{t('simpleMode')}</p><p className="m-0 text-sm text-ink-soft">{t('simpleModeDesc')}</p></div>
-          <Switch on={simple} onChange={(b) => set({ simple: b })} label={t('simpleMode')} />
-        </div>
         <div className="flex items-center justify-between gap-4 py-3">
           <div><p className="m-0 font-bold">{t('highContrast')}</p><p className="m-0 text-sm text-ink-soft">{t('highContrastDesc')}</p></div>
           <Switch on={contrast} onChange={(b) => set({ contrast: b })} label={t('highContrast')} />

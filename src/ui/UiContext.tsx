@@ -3,8 +3,8 @@ import type { Lang } from '../scan/schema';
 import { translate, type StringKey } from '../i18n/strings';
 import { store } from '../lib/storage';
 
-export interface Prefs { lang: Lang; simple: boolean; contrast: boolean; rate: number; scale: number }
-const DEFAULTS: Prefs = { lang: 'en', simple: false, contrast: false, rate: 1, scale: 1 };
+export interface Prefs { lang: Lang; contrast: boolean; rate: number; scale: number }
+const DEFAULTS: Prefs = { lang: 'en', contrast: false, rate: 1, scale: 1 };
 const KEY = 'remed.prefs';
 
 interface Ui extends Prefs {
@@ -19,11 +19,15 @@ interface Ui extends Prefs {
 const Ctx = createContext<Ui | null>(null);
 
 export function UiProvider({ children }: { children: ReactNode }) {
-  const [p, setP] = useState<Prefs>(() => ({ ...DEFAULTS, ...store.get<Partial<Prefs>>(KEY, {}) }));
+  const [p, setP] = useState<Prefs>(() => {
+    // Drop the retired Simple Mode flag from older saved prefs.
+    const saved: Partial<Prefs> & { simple?: unknown } = { ...store.get<Partial<Prefs>>(KEY, {}) };
+    delete saved.simple;
+    return { ...DEFAULTS, ...saved };
+  });
   useEffect(() => {
     const h = document.documentElement;
     h.lang = p.lang;
-    h.classList.toggle('simple-mode', p.simple);
     h.classList.toggle('high-contrast', p.contrast);
     h.style.setProperty('--text-scale', String(p.scale));
     store.set(KEY, p);

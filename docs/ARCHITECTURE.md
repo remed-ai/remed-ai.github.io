@@ -4,13 +4,13 @@ Static Vite + React + TypeScript + Tailwind site (paper-and-ink design from the 
 
 ```
 index.html → src/main.tsx (UiProvider prefs, PWA) → src/App.tsx (lib/router.tsx; 404.html = index.html on Pages)
-  ui/AppShell.tsx  sticky header (brand, Simple Mode) + bottom nav (Home, History, My Medicines, Settings)
+  ui/AppShell.tsx  sticky header (brand) + bottom nav (Home, History, My Medicines, Settings)
   /             pages/Home.tsx           time-of-day quote (i18n/quotes.ts), scan card, recently explained
   /scan         pages/ScanPage.tsx       demo/ScanDemo.tsx ScanPanel: privacy note → Camera → reading → ResultView
                                          ?sample=<id> opens a prepared sample result
   /history      pages/HistoryPage.tsx    on-device history (scan/history.ts), /history/:id detail
   /medicines    pages/MedicinesPage.tsx  saved medicines + expiry status (scan/medicines.ts)
-  /settings     pages/SettingsPage.tsx   language, Simple Mode, high contrast, voice speed, text size, about
+  /settings     pages/SettingsPage.tsx   language, high contrast, voice speed, text size, about
   /demo, /judge hidden staff pages: booth kiosk (showcase/Showcase.tsx) and 2-minute tour
 ```
 
@@ -30,7 +30,7 @@ If the configured model returns 404, `pickVisionModel()` chooses one from the Ge
 
 ## State
 - `demo/useScanner.ts` — phase, image, result, corrections, sample interaction history.
-- `ui/UiContext.tsx` — persisted prefs: language, Simple Mode, high contrast, voice speed, text scale. `ui/icons.tsx` — line icons.
+- `ui/UiContext.tsx` — persisted prefs: language, high contrast, voice speed, text scale. `ui/icons.tsx` — line icons.
 - `scan/summary.ts` — plain summary built only from printed text. `lib/speech.ts` — read aloud + voice questions.
 - `i18n/strings.ts` — UI strings; Hindi/Punjabi need human review.
 - `config.ts` — staff PIN, emergency number, cooldown, idle timers, default model.

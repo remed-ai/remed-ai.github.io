@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Link, usePath } from '../lib/router';
 import { useUi } from './UiContext';
-import { BrandMark, IconHistory, IconHome, IconLines, IconPill, IconSettings, IconBack } from './icons';
+import { BrandMark, IconHistory, IconHome, IconPill, IconSettings, IconBack } from './icons';
 import type { StringKey } from '../i18n/strings';
 
 const NAV: { to: string; label: StringKey; Icon: typeof IconHome }[] = [
@@ -13,7 +13,7 @@ const NAV: { to: string; label: StringKey; Icon: typeof IconHome }[] = [
 
 /** Sticky header, centred column, fixed bottom navigation. */
 export function AppShell({ children, title, back }: { children: ReactNode; title?: string; back?: string }) {
-  const { t, simple, set } = useUi();
+  const { t } = useUi();
   const path = usePath();
   const active = (to: string) => (to === '/' ? path === '/' || path === '/scan' : path.startsWith(to));
   return (
@@ -24,9 +24,6 @@ export function AppShell({ children, title, back }: { children: ReactNode; title
           <BrandMark />
           <span className="font-display text-xl font-semibold tracking-tight">Remed-AI</span>
         </Link>
-        <button type="button" className="btn-ghost bg-raised text-sm" aria-pressed={simple} onClick={() => set({ simple: !simple })}>
-          <IconLines size={18} />{t('simpleMode')}
-        </button>
       </header>
       <main id="main" className="mx-auto max-w-[560px] px-4 pt-4 md:max-w-[640px]">
         {(title || back) && (
