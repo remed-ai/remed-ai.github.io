@@ -136,17 +136,6 @@ button:disabled { opacity: 0.55; cursor: default; }
 .eq span:nth-child(2) { animation-delay: 0.15s; } .eq span:nth-child(3) { animation-delay: 0.3s; }
 @keyframes eq { 0%, 100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
 
-/* Booth kiosk */
-.scan-orb { border-radius: 50%; background: var(--marigold); color: #fff; box-shadow: var(--shadow-float); font-family: var(--font-display); font-weight: 600; }
-.try-motion { animation: rm-bob 3.2s ease-in-out infinite, rm-pulse 1.6s ease-in-out infinite; }
-@keyframes rm-bob { 0%, 100% { translate: 0 -2%; } 50% { translate: 0 3%; } }
-@keyframes rm-pulse { 0%, 100% { scale: 1; } 50% { scale: 1.04; } }
-.slam { animation: slam 0.55s cubic-bezier(0.2, 1.6, 0.4, 1); }
-@keyframes slam { 0% { scale: 1; } 35% { scale: 1.18; } 60% { scale: 0.96; } 100% { scale: 1; } }
-.shockwave { position: absolute; inset: 0; border: 6px solid var(--marigold); animation: shock 0.8s ease-out forwards; pointer-events: none; }
-@keyframes shock { from { opacity: 0.9; transform: scale(1); } to { opacity: 0; transform: scale(1.7); } }
-.burst { animation: burst 0.45s cubic-bezier(0.6, 0, 0.3, 1) forwards; }
-@keyframes burst { to { transform: scale(6); opacity: 0; } }
 .rise { animation: rise 300ms cubic-bezier(0.32, 0.72, 0.35, 1) both; }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 

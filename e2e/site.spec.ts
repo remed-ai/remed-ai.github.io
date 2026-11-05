@@ -43,9 +43,10 @@ test('language switch changes the result instantly', async ({ page }) => {
 });
 
 test('two sample medicines show the sample interaction warning', async ({ page }) => {
-  await page.goto('./judge');
-  await page.getByTestId('sample-zentrova').click();
+  await page.goto('./scan?sample=zentrova');
   await page.getByTestId('scan-another').click();
+  await page.getByTestId('consent-ok').click();
+  await page.getByTestId('upload-input').setInputFiles({ name: 'x.png', mimeType: 'image/png', buffer: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', 'base64') });
   await page.getByTestId('sample-kelvora').click();
   await expect(page.getByTestId('interaction')).toContainText('Sample interaction warning');
 });
@@ -90,10 +91,11 @@ test('report a wrong result saves a note without an image', async ({ page }) => 
   expect(saved).not.toContain('data:image');
 });
 
-test('judge tour lives at /judge', async ({ page }) => {
-  await page.goto('./judge');
-  await page.getByTestId('judge-start').click();
-  await expect(page.getByTestId('judge-panel')).toContainText('Step 1 of 8');
+test('old demo and judge links open the home page', async ({ page }) => {
+  for (const p of ['./demo', './judge']) {
+    await page.goto(p);
+    await expect(page.getByTestId('scan-now')).toBeVisible();
+  }
 });
 
 test('a scanned medicine can be saved to My Medicines', async ({ page }) => {

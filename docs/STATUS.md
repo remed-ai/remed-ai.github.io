@@ -1,14 +1,14 @@
 # Status
 
-Updated: 2026-11-04
+Updated: 2026-11-05
 
-Live: https://remed-ai.github.io/ · Booth: /demo (PIN 2580) · Judges: /judge
+Live: https://remed-ai.github.io/
 
 ## What works (locally verified)
 - Paper-and-ink redesign based on the earlier RemedAI app: Home (quote + scan card + recent), Scan (viewfinder), results with read-aloud bar, History, My Medicines, Settings.
-- Hidden /demo booth kiosk (TRY SCAN, idle reset, PIN exit) and /judge 2-minute tour. Samples via /scan?sample=<id>.
+- Samples via /scan?sample=<id>. Booth mode (/demo) and judge tour (/judge) were removed; those links open Home.
 - Live Gemini with Zod validation, retries and model fallback.
-- 62 unit tests, 16 Playwright phone tests, 28 guard checks pass.
+- 62 unit tests, 12 Playwright phone tests, 28 guard checks pass.
 
 ## Known bugs
 - None open. Hindi and Punjabi wording not yet human-reviewed.

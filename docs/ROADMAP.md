@@ -22,14 +22,14 @@ Status key: **Live** (works on the site with Gemini), **Sample** (prepared/offli
 | Sample items and results | Sample | Fictional, DEMO ONLY |
 | Blurry "I'm not sure" sample | Sample | |
 | Interaction warning | Sample | Only between the two fictional medicines |
-| Booth / kiosk mode (`/demo`) | Live | Hidden staff page |
+| Booth / kiosk mode (`/demo`) | Removed | Owner request |
 | Plain summary of each scan | Live | Built only from printed text |
 | Scan history (on device) | Live | Up to 30, clearable |
 | My Medicines (saved printed details + expiry status) | Live | On device; no reminders yet |
 | High contrast, voice speed, text size | Live | Settings page |
 | Voice questions (speech input) | Live | Where the browser supports it |
 | Offline attract screen (PWA) | Live | |
-| Two-minute judge tour (`/judge`) | Live | Hidden page |
+| Two-minute judge tour (`/judge`) | Removed | Owner request |
 | Root URL https://remed-ai.github.io/ | Live | Repo renamed to `remed-ai.github.io` |
 | Backend key storage | Planned | See LATER-SETUP.md |
 | Real drug database | Planned | |

@@ -28,4 +28,6 @@
 
 **Default model `gemini-flash-latest`.** An alias that tracks the current vision-capable Flash model; overridable with the `VITE_GEMINI_MODEL` Actions variable, with automatic fallback via the model list.
 
-**Design taken from the earlier RemedAI app (owner request).** Paper-and-ink palette, turmeric marigold accent, rubber-stamp teal, brick for warnings; Fraunces + Atkinson Hyperlegible; dog-eared cards; highlighter stroke behind the result title; bottom navigation; high contrast. No emojis: line icons only. Samples are not offered on the normal scan screen; they appear only as a fallback when live scanning fails, via `/scan?sample=<id>`, and on the staff pages.
+**Design taken from the earlier RemedAI app (owner request).** Paper-and-ink palette, turmeric marigold accent, rubber-stamp teal, brick for warnings; Fraunces + Atkinson Hyperlegible; dog-eared cards; highlighter stroke behind the result title; bottom navigation; high contrast. No emojis: line icons only. Samples are not offered on the normal scan screen; they appear only as a fallback when live scanning fails, and via `/scan?sample=<id>`.
+
+**Booth mode and judge tour removed (owner request).** The hidden `/demo` kiosk and `/judge` tour are gone; old links fall through to Home. Printable sample items stay at `/booth/print.html`.

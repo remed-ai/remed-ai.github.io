@@ -10,9 +10,6 @@ const KEY = 'remed.prefs';
 interface Ui extends Prefs {
   set: (p: Partial<Prefs>) => void;
   setLang: (l: Lang) => void;
-  /** Legacy toggle used by booth mode: large text = scale 1.25. */
-  large: boolean;
-  setLarge: (b: boolean) => void;
   reset: () => void;
   t: (k: StringKey, vars?: Record<string, string | number>) => string;
 }
@@ -37,8 +34,6 @@ export function UiProvider({ children }: { children: ReactNode }) {
     return {
       ...p, set,
       setLang: (lang) => set({ lang }),
-      large: p.scale > 1.1,
-      setLarge: (b) => set({ scale: b ? 1.25 : 1 }),
       reset: () => setP(DEFAULTS),
       t: (k, v) => translate(p.lang, k, v),
     };

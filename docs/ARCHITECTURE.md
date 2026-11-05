@@ -11,7 +11,6 @@ index.html → src/main.tsx (UiProvider prefs, PWA) → src/App.tsx (lib/router.
   /history      pages/HistoryPage.tsx    on-device history (scan/history.ts), /history/:id detail
   /medicines    pages/MedicinesPage.tsx  saved medicines + expiry status (scan/medicines.ts)
   /settings     pages/SettingsPage.tsx   language, high contrast, voice speed, text size
-  /demo, /judge hidden staff pages: booth kiosk (showcase/Showcase.tsx) and 2-minute tour
 ```
 
 ## Scan pipeline
@@ -33,7 +32,7 @@ If the configured model returns 404, `pickVisionModel()` chooses one from the Ge
 - `ui/UiContext.tsx` — persisted prefs: language, high contrast, voice speed, text scale. `ui/icons.tsx` — line icons.
 - `scan/summary.ts` — plain summary built only from printed text. `lib/speech.ts` — read aloud + voice questions.
 - `i18n/strings.ts` — UI strings; Hindi/Punjabi need human review.
-- `config.ts` — staff PIN, emergency number, cooldown, idle timers, default model.
+- `config.ts` — emergency number, cooldown, image size, default model.
 
 ## Build & deploy
 `.github/workflows/deploy.yml`: test job (lint, typecheck, unit, build, Playwright Pixel 7) → deploy job (BASE_PATH from repo name, key from secret, `actions/deploy-pages`) → smoke job (`scripts/smoke.mjs` fetches the live URL and its main script).

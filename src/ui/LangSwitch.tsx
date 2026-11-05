@@ -2,7 +2,7 @@ import type { Lang } from '../scan/schema';
 import { STRINGS } from '../i18n/strings';
 import { useUi } from './UiContext';
 
-/** Compact language switch for staff and booth screens. */
+/** Compact language switch for result screens. */
 export function LangSwitch() {
   const { lang, setLang } = useUi();
   return (
