@@ -1,5 +1,6 @@
 import { STRINGS } from '../i18n/strings';
 import type { Lang } from '../scan/schema';
+import { Link } from '../lib/router';
 import { AppShell } from '../ui/AppShell';
 import { useUi } from '../ui/UiContext';
 
@@ -37,6 +38,7 @@ export function SettingsPage() {
         <input id="scale" type="range" min={0.9} max={1.6} step={0.1} value={scale} onChange={(e) => set({ scale: Number(e.target.value) })} className="w-full accent-[var(--marigold)]" />
       </section>
 
+      <p className="pt-5"><Link to="/welcome" className="font-bold text-teal-deep underline">{t('showWelcome')}</Link></p>
       <p className="py-5 text-sm text-ink-faint">Not professional medical advice.</p>
     </AppShell>
   );

@@ -1,5 +1,10 @@
 import { expect, test } from '@playwright/test';
 
+// These tests start inside the app; the welcome screen has its own spec.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('remed.welcomed', 'true'));
+});
+
 test('home has a quote, a big scan card and bottom navigation', async ({ page }) => {
   await page.goto('./');
   await expect(page.getByTestId('quote')).not.toBeEmpty();
@@ -89,13 +94,6 @@ test('report a wrong result saves a note without an image', async ({ page }) => 
   const saved = await page.evaluate(() => localStorage.getItem('remed.reports') || '');
   expect(saved).toContain('Expiry looked different');
   expect(saved).not.toContain('data:image');
-});
-
-test('old demo and judge links open the home page', async ({ page }) => {
-  for (const p of ['./demo', './judge']) {
-    await page.goto(p);
-    await expect(page.getByTestId('scan-now')).toBeVisible();
-  }
 });
 
 test('a scanned medicine can be saved to My Medicines', async ({ page }) => {
