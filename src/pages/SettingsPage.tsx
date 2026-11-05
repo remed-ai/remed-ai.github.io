@@ -1,4 +1,3 @@
-import { CONFIG } from '../config';
 import { STRINGS } from '../i18n/strings';
 import type { Lang } from '../scan/schema';
 import { AppShell } from '../ui/AppShell';
@@ -38,13 +37,7 @@ export function SettingsPage() {
         <input id="scale" type="range" min={0.9} max={1.6} step={0.1} value={scale} onChange={(e) => set({ scale: Number(e.target.value) })} className="w-full accent-[var(--marigold)]" />
       </section>
 
-      <section className="py-5">
-        <h2 className="eyebrow mb-2">{t('aboutTitle')}</h2>
-        <p className="text-ink-soft">{t('aboutBody')}</p>
-        <p className="text-sm text-ink-soft">{t('privacyBody')}</p>
-        <p className="text-sm font-bold">{t('emergencyLine', { n: CONFIG.emergencyNumber })}</p>
-        <p className="text-sm text-ink-faint">Not professional medical advice.</p>
-      </section>
+      <p className="py-5 text-sm text-ink-faint">Not professional medical advice.</p>
     </AppShell>
   );
 }

@@ -10,7 +10,7 @@ index.html → src/main.tsx (UiProvider prefs, PWA) → src/App.tsx (lib/router.
                                          ?sample=<id> opens a prepared sample result
   /history      pages/HistoryPage.tsx    on-device history (scan/history.ts), /history/:id detail
   /medicines    pages/MedicinesPage.tsx  saved medicines + expiry status (scan/medicines.ts)
-  /settings     pages/SettingsPage.tsx   language, high contrast, voice speed, text size, about
+  /settings     pages/SettingsPage.tsx   language, high contrast, voice speed, text size
   /demo, /judge hidden staff pages: booth kiosk (showcase/Showcase.tsx) and 2-minute tour
 ```
 
